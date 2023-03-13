@@ -1,0 +1,256 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+.btn {
+  width: 40%;
+  padding: 0.8em;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  color: #1d1d1d;
+  background-color: #08fdd8;
+  border: none;
+  border-radius: 1em;
+}
+.btn:focus-within {
+  color: #FFFFFF;
+}
+.btn:hover {
+  background-color: #e60de6;
+  color: #FFFFFF;
+}
+.btn:focus {
+  background-color: #e0113e;
+}
+.btn:active {
+  background-color: darkblue;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 5em;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  color: #FFFFFF;
+  color-scheme: light dark;
+  background-color: #242424;
+  scroll-behavior: smooth;
+}
+
+#home {
+  width: 100%;
+  height: auto;
+  text-align: center;
+  display: grid;
+  grid-template-columns: 1.5fr 0.5fr;
+  grid-template-rows: 1fr 0.1fr;
+  gap: 1em;
+  grid-template-areas: "Text animation" "click click";
+}
+@media screen and (max-width: 991px) {
+  #home {
+    grid-template-columns: 1fr;
+  }
+}
+#home section {
+  width: 100%;
+}
+#home section:first-of-type {
+  grid-area: Text;
+}
+#home section:last-of-type {
+  grid-area: animation;
+}
+#home > div {
+  position: relative;
+  height: 3em;
+  margin: 7em 0;
+  grid-area: click;
+}
+#home > div a {
+  color: inherit;
+}
+
+.further {
+  position: absolute;
+}
+.further::before, .further::after {
+  content: "";
+  position: absolute;
+  bottom: -70%;
+  left: -13%;
+  width: 2.5em;
+  height: 0.1em;
+  background-color: #FFFFFF;
+  transform: rotate(25deg);
+  animation: Bounce-1 1s linear infinite;
+}
+.further::after {
+  right: -13%;
+  left: auto;
+  transform: rotate(-25deg);
+  animation: Bounce-2 1s linear infinite;
+}
+
+@keyframes Bounce-1 {
+  70% {
+    transform: rotate(25deg) translateY(0);
+    width: 2.5em;
+  }
+  80% {
+    transform: rotate(25deg) translateY(0.9em);
+    width: 2.9em;
+  }
+  100% {
+    transform: rotate(25deg) translateY(0);
+    width: 2.5em;
+  }
+}
+@keyframes Bounce-2 {
+  70% {
+    transform: rotate(-25deg) translateY(0);
+    width: 2.5em;
+  }
+  80% {
+    transform: rotate(-25deg) translateY(0.9em);
+    width: 2.9em;
+  }
+  100% {
+    transform: rotate(-25deg) translateY(0);
+    width: 2.5em;
+  }
+}
+.intro-text {
+  display: grid;
+  justify-content: flex-start;
+}
+.intro-text h1 {
+  margin-bottom: 1em;
+  max-width: 10em;
+  text-align: left;
+  font-size: 4.3rem;
+  line-height: 5rem;
+}
+@media screen and (max-width: 767px) {
+  .intro-text h1 {
+    font-size: 2.3rem;
+    line-height: 3rem;
+  }
+}
+@media screen and (min-width: 992px) {
+  .intro-text h1 {
+    font-size: 5.3rem;
+    line-height: 6rem;
+  }
+}
+.intro-text h1 span {
+  display: inline-block;
+}
+.intro-text h1 span:hover {
+  color: #e60de6;
+}
+.intro-text h1 span.last-letter {
+  margin-right: 0.3em;
+}
+
+.intro-animation div {
+  background-color: red;
+  width: 20em;
+  height: 20em;
+}
+
+.card {
+  max-width: 18em;
+  height: 26em;
+  padding: 0.5em 1.5em;
+  color: black;
+  background-color: #BD7A47;
+  box-shadow: 0 0 1em 7px black, 0 0 1em 1em #39496E, inset 0 0 8px black;
+}
+.card header {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.3em 0.8em;
+  margin-bottom: 0.5em;
+  box-shadow: 2px 2px 0px 2px black, 0px 0px 0px 3px #D5AF99, inset 0 0 8px black;
+}
+.card aside {
+  display: flex;
+  justify-content: end;
+  gap: 0.2em;
+}
+.card aside div {
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  background-color: red;
+  box-shadow: inset 0 0 8px black;
+}
+.card figcaption {
+  padding: 0.5em;
+  background-color: #DBCAAB;
+  text-overflow: ellipsis;
+  box-shadow: 0 0 0 0.4em #6e3939, inset 0 0 1em #BD7A47;
+  overflow: hidden;
+}
+.card footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1em;
+}
+.card footer p {
+  font-size: 0.6em;
+}
+
+#root {
+  max-width: 1480px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+
+.logo:hover {
+  filter: drop-shadow(0 0 2em rgba(100, 108, 255, 0.6666666667));
+}
+
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em rgba(97, 218, 251, 0.6666666667));
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+.read-the-docs {
+  color: #888;
+}
+
+/*# sourceMappingURL=style.css.map */

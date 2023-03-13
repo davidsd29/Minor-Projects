@@ -1,0 +1,139 @@
+.btn {
+    width: 40%;
+    padding: .8em;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    color: color(primary);
+    background-color: color(tertiary);
+    border: none;
+    border-radius: 1em;
+
+    &:focus-within {
+        color: color(quaternary);
+    }
+
+    &:hover {
+        background-color: color(hover);
+        color: color(quaternary);
+    }
+
+    &:focus {
+        background-color: color(focus);
+    }
+
+    &:active {
+        background-color: color(active);
+    }
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 5em;
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    color: color(quaternary);
+    color-scheme: light dark;
+    background-color: #242424;
+    scroll-behavior: smooth;
+}
+
+#home {
+    width: 100%;
+    height: auto;
+
+    text-align: center;
+    display: grid;
+    grid-template-columns: 1.5fr .5fr;
+    grid-template-rows: 1fr .1fr;
+    gap: 1em;
+    grid-template-areas:
+    "Text animation"
+    "click click";
+
+    @include respond-to(up-to-md) {
+        grid-template-columns: 1fr;
+    }
+
+    section {
+        width:100%;
+
+        &:first-of-type {
+            grid-area: Text;
+        } 
+        
+        &:last-of-type {
+            grid-area: animation;
+        }
+    }
+
+    > div {
+        position: relative;
+        height: 3em;
+        margin: 7em 0;
+        grid-area: click;
+
+        a {
+            color: inherit;
+        }
+    }
+}
+
+.further {
+    position: absolute;
+
+
+    &::before, &::after {
+        content:"";
+        position: absolute;
+        bottom: -70%;
+        left: -13%;
+        width: 2.5em;
+        height: .1em;
+        background-color: color(quaternary);
+        transform: rotate(25deg);
+        animation: Bounce-1 1s linear infinite;
+    }
+    
+    &::after {
+        right: -13%;
+        left: auto;
+        transform: rotate(-25deg);
+        animation: Bounce-2 1s linear infinite;
+    }
+}
+
+@keyframes Bounce-1 {
+    70% {
+            transform: rotate(25deg) translateY(0);
+            width: 2.5em;
+        }
+    
+        80% {
+            transform: rotate(25deg) translateY(.9em);
+            width: 2.9em;
+        }
+        100% {
+            transform: rotate(25deg) translateY(0);
+            width: 2.5em;
+        }
+    }
+
+
+@keyframes Bounce-2 {
+    70% {
+            transform: rotate(-25deg) translateY(0);
+            width: 2.5em;
+        }
+    
+        80% {
+            transform: rotate(-25deg) translateY(.9em);
+            width: 2.9em;
+        }
+    
+        100% {
+            transform: rotate(-25deg) translateY(0);
+            width: 2.5em;
+        }
+    }
