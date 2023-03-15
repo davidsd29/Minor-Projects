@@ -11,8 +11,8 @@
         line-height: 5rem;
 
             @include respond-to(up-to-sm) {
-                font-size: 2.3rem;
-                line-height: 3rem;
+                font-size: 3.2rem;
+                line-height: 3.5rem;
             }
 
             @include respond-to(from-lg) {
@@ -35,9 +35,13 @@
 }
 
 .intro-animation {
-    div{
+    div {
         background-color: red;
         width: 20em;
-        height: 20em
+        height: 20em; 
+    }
+
+    @include respond-to(up-to-md) {
+        display: none;
     }
 }

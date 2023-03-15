@@ -1,196 +1,170 @@
 .btn {
-    width: 40%;
-    padding: .8em;
-    text-decoration: none;
-    text-align: center;
-    cursor: pointer;
-    color: color(tertiary);
-    border: 2px solid color(tertiary);
-    border-radius: 1em;
-    box-shadow: inset 0 0 10px 5px color(tertiary), 0 0 10px 5px #4b7a8d;
+	width: 40%;
+	padding: 0.8em;
+	text-decoration: none;
+	text-align: center;
+	cursor: pointer;
+	color: color(tertiary);
+	border: 2px solid color(tertiary);
+	border-radius: 1em;
+	box-shadow: inset 0 0 10px 5px color(tertiary), 0 0 10px 5px #4b7a8d;
 
-    &:focus-within {
-        color: color(quaternary);
-    }
+	&:focus-within {
+		color: color(quaternary);
+	}
 
-    &:hover {
-        color: color(hover);
-        border-color: color(hover);
-        box-shadow: inset 0 0 10px 5px color(hover), 0 0 10px 5px #854b8d;
-    }
+	&:hover {
+		color: color(hover);
+		border-color: color(hover);
+		box-shadow: inset 0 0 10px 5px color(hover), 0 0 10px 5px #854b8d;
+	}
 
-    &:focus {
-        background-color: color(focus);
-    }
+	&:focus {
+		background-color: color(focus);
+	}
 
-    &:active {
-        background-color: color(active);
-    }
+	&:active {
+		background-color: color(active);
+	}
 }
 
-
 main {
-    scroll-margin: 2em;
-    >section {
-        margin: 6em 0;
-        scroll-snap-align: center;
-        
-        h2 {
-            text-align: center;
-        }
-    }
+	scroll-margin: 2em;
+	> section {
+		margin: 6em 0;
+		scroll-snap-align: center;
+
+		h2 {
+			text-align: center;
+		}
+	}
 }
 
 #home {
-    width: 100%;
-    height: auto;
+	width: 100%;
+	height: auto;
 
-    text-align: center;
-    display: grid;
-    grid-template-columns: 1.5fr .5fr;
-    grid-template-rows: 1fr .1fr;
-    gap: 1em;
-    grid-template-areas:
-    "Text animation"
-    "click click";
+	text-align: center;
+	display: grid;
+	grid-template-columns: 1.5fr 0.5fr;
+	grid-template-rows: 1fr 0.1fr;
+	gap: 1em;
+	grid-template-areas:
+		'Text animation'
+		'click click';
 
-    @include respond-to(up-to-md) {
-        grid-template-columns: 1fr;
-    }
+	@include respond-to(up-to-md) {
+		grid-template-columns: 1fr;
+		grid-template-areas:
+			'Text'
+			'click';
+	}
 
-    h1 {
-        -webkit-text-stroke: 2px color(tertiary);
-        color: transparent;
-            /* width and color */
-        text-shadow: 1px 1px 2px transparent, 0 0 0.2em color(tertiary);
-    }
+	h1 {
+		-webkit-text-stroke: 2px color(tertiary);
+		color: transparent;
+		/* width and color */
+		text-shadow: 1px 1px 2px transparent, 0 0 0.2em color(tertiary);
+	}
 
-    section {
-        width:100%;
+	section {
+		width: 100%;
 
-        &:first-of-type {
-            grid-area: Text;
-        } 
-        
-        &:last-of-type {
-            grid-area: animation;
-        }
-    }
+		&:first-of-type {
+			grid-area: Text;
+		}
 
-    > div {
-        position: relative;
-        height: 3em;
-        margin: 7em 0;
-        grid-area: click;
-    }
+		&:last-of-type {
+			grid-area: animation;
+		}
+	}
+
+	> div {
+		position: relative;
+		height: 3em;
+		margin: 7em 0;
+		grid-area: click;
+	}
 }
 
 #about {
-    h2{
-        margin-bottom: 2em;
-    }
+	h2 {
+		margin-bottom: 2em;
+	}
 
-    #myCanvasContainer {
-        width: 30em;
-            @include respond-to(up-to-md) {
-                text-align: center;
-            }
-    
-            #myCanvas {
-                margin: auto;
-                width: 100%;
-            }  
-        }
+	#myCanvasContainer {
+		width: 30em;
 
-    >div {
-        display: flex;
+		@include respond-to(up-to-md) {
+			text-align: center;
+		}
 
-    article {
-        max-width: 50%;
-    }
-        div {
-            display: flex;
-            justify-content: space-between;
+		#myCanvas {
+			margin: auto;
+			width: 100%;
+		}
+	}
 
-            &:last-of-type {
-                    margin-bottom: 2em;
-            }
+	> div {
+		display: grid;
+		place-items: center;
 
-         
-        }
-    }
+		article {
+			max-width: 80%;
+		}
+
+		div {
+			display: flex;
+			justify-content: space-between;
+
+			&:last-of-type {
+				margin-bottom: 2em;
+			}
+		}
+	}
 }
 
-.further {
-    position: relative;
-    color: inherit;
+.click-me {
+	display: grid;
+	place-items: center;
+	text-align: center;
 
-    p { 
-        position: absolute;
-        text-shadow: 1px 1px 2px darkcyan, 0 0 0.2em color(tertiary);
-        animation: Bounce 1s linear infinite alternate;
+	a {
+		position: relative;
+		color: inherit;
+	}
 
-        &::before,
-        &::after {
-            content: "";
-            position: absolute;
-            bottom: -70%;
-            left: -13%;
-            width: 2.5em;
-            height: .1em;
-            background-color: color(tertiary);
-            transform: rotate(25deg);
-        }
-        
-        &::after {
-            right: -13%;
-            left: auto;
-            transform: rotate(-25deg);
-        }
-    }
+	p {
+		position: absolute;
+		text-shadow: 1px 1px 2px darkcyan, 0 0 0.2em color(tertiary);
+		animation: Bounce .8s linear infinite alternate;
+
+		&::before,
+		&::after {
+			content: '';
+			position: absolute;
+			bottom: -70%;
+			left: -13%;
+			width: 2.5em;
+			height: 0.1em;
+			background-color: color(tertiary);
+			transform: rotate(25deg);
+		}
+
+		&::after {
+			right: -13%;
+			left: auto;
+			transform: rotate(-25deg);
+		}
+	}
 }
 
-@keyframes Bounce-1 {
-    70% {
-            transform: rotate(25deg) translateY(0);
-            width: 2.5em;
-        }
-    
-        80% {
-            transform: rotate(25deg) translateY(.9em);
-            width: 2.9em;
-        }
-        100% {
-            transform: rotate(25deg) translateY(0);
-            width: 2.5em;
-        }
-    }
-    
-    @keyframes Bounce {
-    from {
-            transform: translateY(0);
-        }
-    
-      
-        to {
-            transform:  translateY(1em);
-        }
-    }
+@keyframes Bounce {
+	from {
+		transform: translateY(0);
+	}
 
-
-@keyframes Bounce-2 {
-    70% {
-            transform: rotate(-25deg) translateY(0);
-            width: 2.5em;
-        }
-    
-        80% {
-            transform: rotate(-25deg) translateY(.9em);
-            width: 2.9em;
-        }
-    
-        100% {
-            transform: rotate(-25deg) translateY(0);
-            width: 2.5em;
-        }
-    }
+	to {
+		transform: translateY(1em);
+	}
+}

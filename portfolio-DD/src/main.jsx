@@ -11,8 +11,8 @@ import './assets/css/style.css';
         <IntroText />
         <IntroAnimation />
 
-      <div>
-          <a href="#repository" className='further'> 
+      <div className='click-me'>
+          <a href="#repository"> 
             <p>Click me</p>
           </a>
       </div>
@@ -24,8 +24,8 @@ import './assets/css/style.css';
       <section id="github-repos">
         <Carousel />
 
-        <div>
-            <a href="#about" className='further'> 
+        <div className='click-me'>
+            <a href="#about"> 
               <p>Click me</p>
             </a>
         </div>
@@ -39,8 +39,8 @@ import './assets/css/style.css';
           <LangueageBol />
         </div>
           
-        <div>
-            <a href="#contact" className='further'>
+        <div className='click-me'>
+            <a href="#contact">
               <p>Contact me</p>
             </a>
         </div>

@@ -28,17 +28,15 @@ html {
 }
 
 body {
-  display: gird;
-  place-content: center;
-  place-items: center;
+  display: grid;
   justify-content: center;
   margin-left: auto;
   margin-right: auto;
-  padding: 5em;
+  padding: 2em;
   max-width: 80em;
   color: #FFFFFF;
   color-scheme: light dark;
-  background-color: #242424;
+  background-color: black;
   scroll-behavior: smooth;
   scroll-snap-type: both mandatory;
   perspective: 1000px;
@@ -94,6 +92,7 @@ main > section h2 {
 @media screen and (max-width: 991px) {
   #home {
     grid-template-columns: 1fr;
+    grid-template-areas: "Text" "click";
   }
 }
 #home h1 {
@@ -134,10 +133,11 @@ main > section h2 {
   width: 100%;
 }
 #about > div {
-  display: flex;
+  display: grid;
+  place-items: center;
 }
 #about > div article {
-  max-width: 50%;
+  max-width: 80%;
 }
 #about > div div {
   display: flex;
@@ -147,16 +147,21 @@ main > section h2 {
   margin-bottom: 2em;
 }
 
-.further {
+.click-me {
+  display: grid;
+  place-items: center;
+  text-align: center;
+}
+.click-me a {
   position: relative;
   color: inherit;
 }
-.further p {
+.click-me p {
   position: absolute;
   text-shadow: 1px 1px 2px darkcyan, 0 0 0.2em #08fdd8;
-  animation: Bounce 1s linear infinite alternate;
+  animation: Bounce 0.8s linear infinite alternate;
 }
-.further p::before, .further p::after {
+.click-me p::before, .click-me p::after {
   content: "";
   position: absolute;
   bottom: -70%;
@@ -166,46 +171,18 @@ main > section h2 {
   background-color: #08fdd8;
   transform: rotate(25deg);
 }
-.further p::after {
+.click-me p::after {
   right: -13%;
   left: auto;
   transform: rotate(-25deg);
 }
 
-@keyframes Bounce-1 {
-  70% {
-    transform: rotate(25deg) translateY(0);
-    width: 2.5em;
-  }
-  80% {
-    transform: rotate(25deg) translateY(0.9em);
-    width: 2.9em;
-  }
-  100% {
-    transform: rotate(25deg) translateY(0);
-    width: 2.5em;
-  }
-}
 @keyframes Bounce {
   from {
     transform: translateY(0);
   }
   to {
     transform: translateY(1em);
-  }
-}
-@keyframes Bounce-2 {
-  70% {
-    transform: rotate(-25deg) translateY(0);
-    width: 2.5em;
-  }
-  80% {
-    transform: rotate(-25deg) translateY(0.9em);
-    width: 2.9em;
-  }
-  100% {
-    transform: rotate(-25deg) translateY(0);
-    width: 2.5em;
   }
 }
 .intro-text {
@@ -221,8 +198,8 @@ main > section h2 {
 }
 @media screen and (max-width: 767px) {
   .intro-text h1 {
-    font-size: 2.3rem;
-    line-height: 3rem;
+    font-size: 3.2rem;
+    line-height: 3.5rem;
   }
 }
 @media screen and (min-width: 992px) {
@@ -245,6 +222,11 @@ main > section h2 {
   background-color: red;
   width: 20em;
   height: 20em;
+}
+@media screen and (max-width: 991px) {
+  .intro-animation {
+    display: none;
+  }
 }
 
 body:has(div.active) header,

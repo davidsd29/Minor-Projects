@@ -16,20 +16,20 @@ html {
 }
 
 body {
-    display: gird;
-    place-content: center;
-    place-items: center;
+    display: grid;
+    // place-content: center;
+    // place-items: center;
     justify-content: center;
     margin-left: auto;
     margin-right: auto;
-    padding: 5em;
+    padding: 2em;
     max-width: 80em;
     color: color(quaternary);
     color-scheme: light dark;
-    background-color: #242424;
+    background-color: color(secondary);
     scroll-behavior: smooth;
     scroll-snap-type: both mandatory;
     perspective: 1000px;
 
-    
+
 }
