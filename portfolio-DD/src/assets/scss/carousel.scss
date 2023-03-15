@@ -49,19 +49,32 @@ body:has(div.active) footer {
 }
 
 #repository {
-	height: 71em;
+	height: 60em;
+	scroll-margin: 2em;
 
 	h2 {
-		margin-bottom: 6em;
+		margin-bottom: 4em;
 	}
+}
+
+@property --caroY {
+	syntax: "<angle>";
+	inherits: true;
+	initial-value: 0deg;
+}
+
+@property --test {
+	syntax: "<color>";
+	inherits: true;
+	initial-value: red;
 }
 
 .carousel-container {
 	margin: 4% auto;
-	width: 210px;
-	height: 50px;
+	width: 13.1em;
+	height: 3.1em;
 	position: relative;
-	perspective: 1000px;
+	perspective: 62.5em;
 
 	#carousel {
 		width: 100%;
@@ -69,6 +82,8 @@ body:has(div.active) footer {
 		position: absolute;
 		transform-style: preserve-3d;
 		animation: rotation 20s infinite linear;
+		transform:rotatey(var(--caroY));
+			
 
 		&:hover {
 			animation-play-state: paused;
@@ -80,16 +95,55 @@ body:has(div.active) footer {
 	}
 }
 
+@keyframes rotation {
+	0% {
+		--caroY: 0deg;
+	}
+
+	100% {
+		--caroY: 360deg;
+	}
+}
+
+
+@keyframes scan {
+	0% {
+		transform:
+			rotateY(var(--rY, 0deg)) translatez(30vmin);
+	}
+
+	50% {
+		transform:
+			rotateY(calc(var(--deltaRY) * -1)) translateY(5em) rotateX(70deg) translateY(-50vmin);
+	}
+
+	80% {
+		transform:
+			 translateY(100%) rotateX(70deg) translateY(60vmin) rotateY(calc(var(--deltaRY) * -1));
+	}	
+	
+	100% {
+		transform:
+			translateY(100%) rotateX(70deg) translateY(60vmin) rotateY(calc(var(--deltaRY) * -1))
+	}	
+	
+	// 100% {
+	// 	transform:
+	// 		 translateY(60vmin) rotateX(70deg) rotateY(calc(var(--deltaRY) * -1)); 
+	// }
+}
+
 .card {
 	position: absolute;
 	left: 10px;
 	top: 10px;
 	display: block;
 	max-width: 18em;
-	width: 100%;
-	height: 19em;
-	padding: 0.5em 1.5em;
+	width: 75%;
+	height: 15em;
+	padding: .5em .5em;
 	color: color(tertiary);
+	animation: color 5s linear infinite;
 	box-shadow: 0 0 1.5em 4px color(quaternary), 0 0 0.2em 1em color(tertiary),
 		inset 0 0 50px 10px color(tertiary);
 
@@ -97,12 +151,22 @@ body:has(div.active) footer {
 	-webkit-transform-style: preserve-3d;
 	-webkit-backface-visibility: hidden;
 
+	transform:rotateY(var(--rY, 0deg)) translateZ(40vmin);
+		
+
 	&.checked {
 		background-color: red;
 		animation-name: pick-Card;
 		animation-duration: 10s;
 		animation-timing-function: linear;
 		animation-iteration-count: 1;
+	}
+
+	&.scan {
+		animation-name: scan;
+		animation-duration: 5s;
+		animation-timing-function: ease-in-out;
+		animation-fill-mode: forwards;
 	}
 
 	&:hover {
@@ -127,13 +191,11 @@ body:has(div.active) footer {
 	}
 
 
-
-
 	@for $i from 1 through variable(repo-count)  {
 		&:nth-child(#{$i}) {
-			transform: rotateY($i * 40deg) translateZ(400px);
+			--rY: #{$i * 40deg};
 		}
-	}	
+	}
 
 
 	input {
@@ -149,62 +211,82 @@ body:has(div.active) footer {
 		border-style: outset;
 		border-color: #8effee;
 		border-block-end-color: #00a58c;
-
+ h4 {
+	font-size: .7em;
+ }
 		img {
-			width: 1.2em;
-			height: 1.2em;
+			width: .9em;
+			height: .9em;
 			object-fit: contain;
 			border-radius: 50%;
 			border: 1px solid color(tertiary);
 		}
 	}
 
-	aside {
-		display: flex;
-		justify-content: end;
-		gap: 0.2em;
+	>div {
 
-		div {
-			width: .7em;
-			height: .7em;
-			border-radius: 50%;
-			box-shadow: inset 0 0 8px red;
+		&:first-of-type {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+
+			p {
+				font-size: .6em;
+			}
+
+			aside {
+				display: flex;
+				justify-content: end;
+				gap: 0.2em;
+		
+				div {
+					width: .5em;
+					height: .5em;
+					border-radius: 50%;
+					box-shadow: inset 0 0 8px red;
+				}
+			}
 		}
-	}
 
-	> div {
-		display: grid;
-		place-items: center;
-		margin-bottom: 0.1em;
-		margin-top: -0.3em;
+	
+
+	&:nth-of-type(2) {
+		display: flex;
+		margin-bottom: .5em;
+		margin-top: .2em;
 
 		img {
-			width: 100%;
-			height: 90%;
+			width: 85%;
+			margin-left: auto;
+			margin-right: auto;
+			object-fit: contain;
 			border: 0.4em outset;
 			filter: saturate(1.5);
 			border-color: #8effee;
 			border-block-end-color: #00a58c;
 		}
 	}
+	}
 
 	figcaption {
 		width: 100%;
-		max-height: 6.5em;
-		padding: .5em;
+		max-height: 5.5em;
+		padding: .5em 1em;
 		text-overflow: ellipsis;
-		font-size: .7em;
+		font-size: .5em;
 		border-radius: .1em;
 		box-shadow: 0 0 0 0.2em #00a58c, inset 0 0 1em color(tertiary);
 		overflow: hidden;
 	}
 
 	footer {
-		position: relative;
-		margin-top: .4em;
+		position: absolute;
+		color: color(secondary);
+		top: 101%;
+		transform: translate(10%, 0%);
 
 		p {
-			font-size: .5em;
+			font-size: .3em;
 		}
 
 		&::before,
@@ -233,16 +315,6 @@ body:has(div.active) footer {
 	}
 }
 
-@keyframes rotation {
-	from {
-		transform: rotateY(0deg);
-	}
-
-	to {
-		transform: rotateY(360deg);
-	}
-}
-
 .scanner {
 	position: relative;
 	perspective: 62.5em;
@@ -266,7 +338,7 @@ body:has(div.active) footer {
 
 			transform-style: preserve-3d;
 			transform-origin: center bottom;
-			transform: translate(-50%, 55%) rotateX(90deg) translate3d(0, -15em, -.8em);
+			transform: translate(-50%, 30%) rotateX(90deg) translate3d(0, -15em, -.8em);
 
 			span {
 				display: block;
@@ -328,7 +400,7 @@ body:has(div.active) footer {
 			border-color: #1c2437;
 			background-color: #29344e;
 			box-shadow: 0 0 10px #00000080, 0 0 15px #000000bf inset;
-			transform: translate(-50%, 53.7em);
+			transform: translate(-50%, 45.7em);
 		}
 	}
 }
@@ -435,6 +507,22 @@ body:has(div.active) footer {
 		}
 	}
 
+	section {
+		display: grid;
+		gap: 2.5em;
+		margin-top: 2em;
+
+		div {
+			display: grid;
+			place-items: center;
+
+			p {
+				color: color(secondary);
+				margin-bottom: .5em;
+			}
+		}
+	}
+
 	.close {
 		position: absolute;
 		top: 2%;
@@ -450,4 +538,8 @@ body:has(div.active) footer {
 			color: color(hover);
 		}
 	}
+}
+
+.red {
+	background-color: red;
 }

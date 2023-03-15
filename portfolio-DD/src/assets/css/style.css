@@ -22,6 +22,10 @@ h3 {
   color: #08fdd8;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body,
 html {
   height: 100%;
@@ -37,8 +41,6 @@ body {
   color: #FFFFFF;
   color-scheme: light dark;
   background-color: black;
-  scroll-behavior: smooth;
-  scroll-snap-type: both mandatory;
   perspective: 1000px;
 }
 
@@ -111,12 +113,12 @@ main > section h2 {
   grid-area: animation;
 }
 #home > div {
-  position: relative;
-  height: 3em;
-  margin: 7em 0;
   grid-area: click;
 }
 
+#about {
+  scroll-margin: 2em;
+}
 #about h2 {
   margin-bottom: 2em;
 }
@@ -147,34 +149,65 @@ main > section h2 {
   margin-bottom: 2em;
 }
 
+#contact {
+  scroll-margin: 2em;
+}
+
 .click-me {
   display: grid;
   place-items: center;
   text-align: center;
+  margin-top: 3em;
+  margin-bottom: 7em;
+}
+.click-me:hover p {
+  text-shadow: 1px 1px 2px orchid, 0 0 0.2em #e60de6;
+}
+.click-me:hover p::before, .click-me:hover p::after {
+  background-color: #e60de6;
 }
 .click-me a {
   position: relative;
   color: inherit;
 }
-.click-me p {
-  position: absolute;
+.click-me a p {
   text-shadow: 1px 1px 2px darkcyan, 0 0 0.2em #08fdd8;
   animation: Bounce 0.8s linear infinite alternate;
 }
-.click-me p::before, .click-me p::after {
+.click-me a p::before, .click-me a p::after {
   content: "";
   position: absolute;
-  bottom: -70%;
-  left: -13%;
-  width: 2.5em;
+  bottom: -90%;
+  left: -5%;
+  width: 2.6em;
   height: 0.1em;
   background-color: #08fdd8;
   transform: rotate(25deg);
 }
-.click-me p::after {
-  right: -13%;
+.click-me a p::after {
+  right: -5%;
   left: auto;
   transform: rotate(-25deg);
+}
+.click-me.repo-link p::before {
+  left: 11%;
+}
+.click-me.repo-link p::after {
+  right: 11%;
+  left: auto;
+}
+.click-me.contact-link p::before, .click-me.contact-link p::after {
+  top: -90%;
+  left: -3%;
+  width: 2.6em;
+  height: 0.1em;
+  background-color: #08fdd8;
+  transform: rotate(-25deg);
+}
+.click-me.contact-link p::after {
+  right: -3%;
+  left: auto;
+  transform: rotate(25deg);
 }
 
 @keyframes Bounce {
@@ -218,6 +251,55 @@ main > section h2 {
   margin-right: 0.3em;
 }
 
+.welcome {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: grid;
+  place-content: center;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  background-color: black;
+  transition: 1s;
+  z-index: 10;
+}
+.welcome div {
+  display: grid;
+  place-items: center;
+}
+.welcome div img {
+  width: 20%;
+  margin-bottom: 2em;
+}
+.welcome div h1 {
+  position: absolute;
+  bottom: 20%;
+  left: 50%;
+  color: #FFFFFF;
+  transform: translate(-50%, -20%);
+}
+.welcome div h1 span {
+  position: relative;
+  bottom: -1.2em;
+  display: inline-block;
+  opacity: 0;
+}
+.welcome div h1 span.active {
+  bottom: 0;
+  opacity: 1;
+  transition: ease-in-out 0.5s;
+}
+.welcome div h1 span.fade {
+  bottom: 9.5em;
+  opacity: 1;
+  transition: ease-in-out 0.5s;
+}
+.welcome div h1 span:nth-of-type(2) {
+  margin-right: 0.6em;
+  color: green;
+}
+
 .intro-animation div {
   background-color: red;
   width: 20em;
@@ -236,18 +318,29 @@ body:has(div.active) footer {
 }
 
 #repository {
-  height: 71em;
+  height: 60em;
+  scroll-margin: 2em;
 }
 #repository h2 {
-  margin-bottom: 6em;
+  margin-bottom: 4em;
 }
 
+@property --caroY {
+  syntax: "<angle>";
+  inherits: true;
+  initial-value: 0deg;
+}
+@property --test {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: red;
+}
 .carousel-container {
   margin: 4% auto;
-  width: 210px;
-  height: 50px;
+  width: 13.1em;
+  height: 3.1em;
   position: relative;
-  perspective: 1000px;
+  perspective: 62.5em;
 }
 .carousel-container #carousel {
   width: 100%;
@@ -255,6 +348,7 @@ body:has(div.active) footer {
   position: absolute;
   transform-style: preserve-3d;
   animation: rotation 20s infinite linear;
+  transform: rotatey(var(--caroY));
 }
 .carousel-container #carousel:hover {
   animation-play-state: paused;
@@ -263,20 +357,44 @@ body:has(div.active) footer {
   animation-play-state: paused;
 }
 
+@keyframes rotation {
+  0% {
+    --caroY: 0deg;
+  }
+  100% {
+    --caroY: 360deg;
+  }
+}
+@keyframes scan {
+  0% {
+    transform: rotateY(var(--rY, 0deg)) translatez(30vmin);
+  }
+  50% {
+    transform: rotateY(calc(var(--deltaRY) * -1)) translateY(5em) rotateX(70deg) translateY(-50vmin);
+  }
+  80% {
+    transform: translateY(100%) rotateX(70deg) translateY(60vmin) rotateY(calc(var(--deltaRY) * -1));
+  }
+  100% {
+    transform: translateY(100%) rotateX(70deg) translateY(60vmin) rotateY(calc(var(--deltaRY) * -1));
+  }
+}
 .card {
   position: absolute;
   left: 10px;
   top: 10px;
   display: block;
   max-width: 18em;
-  width: 100%;
-  height: 19em;
-  padding: 0.5em 1.5em;
+  width: 75%;
+  height: 15em;
+  padding: 0.5em 0.5em;
   color: #08fdd8;
+  animation: color 5s linear infinite;
   box-shadow: 0 0 1.5em 4px #FFFFFF, 0 0 0.2em 1em #08fdd8, inset 0 0 50px 10px #08fdd8;
   z-index: 1;
   -webkit-transform-style: preserve-3d;
   -webkit-backface-visibility: hidden;
+  transform: rotateY(var(--rY, 0deg)) translateZ(40vmin);
 }
 .card.checked {
   background-color: red;
@@ -284,6 +402,12 @@ body:has(div.active) footer {
   animation-duration: 10s;
   animation-timing-function: linear;
   animation-iteration-count: 1;
+}
+.card.scan {
+  animation-name: scan;
+  animation-duration: 5s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
 }
 .card:hover {
   color: black;
@@ -305,28 +429,28 @@ body:has(div.active) footer {
   -webkit-backface-visibility: hidden;
 }
 .card:nth-child(1) {
-  transform: rotateY(40deg) translateZ(400px);
+  --rY: 40deg;
 }
 .card:nth-child(2) {
-  transform: rotateY(80deg) translateZ(400px);
+  --rY: 80deg;
 }
 .card:nth-child(3) {
-  transform: rotateY(120deg) translateZ(400px);
+  --rY: 120deg;
 }
 .card:nth-child(4) {
-  transform: rotateY(160deg) translateZ(400px);
+  --rY: 160deg;
 }
 .card:nth-child(5) {
-  transform: rotateY(200deg) translateZ(400px);
+  --rY: 200deg;
 }
 .card:nth-child(6) {
-  transform: rotateY(240deg) translateZ(400px);
+  --rY: 240deg;
 }
 .card:nth-child(7) {
-  transform: rotateY(280deg) translateZ(400px);
+  --rY: 280deg;
 }
 .card:nth-child(8) {
-  transform: rotateY(320deg) translateZ(400px);
+  --rY: 320deg;
 }
 .card input {
   display: none;
@@ -341,33 +465,45 @@ body:has(div.active) footer {
   border-color: #8effee;
   border-block-end-color: #00a58c;
 }
+.card header h4 {
+  font-size: 0.7em;
+}
 .card header img {
-  width: 1.2em;
-  height: 1.2em;
+  width: 0.9em;
+  height: 0.9em;
   object-fit: contain;
   border-radius: 50%;
   border: 1px solid #08fdd8;
 }
-.card aside {
+.card > div:first-of-type {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.card > div:first-of-type p {
+  font-size: 0.6em;
+}
+.card > div:first-of-type aside {
   display: flex;
   justify-content: end;
   gap: 0.2em;
 }
-.card aside div {
-  width: 0.7em;
-  height: 0.7em;
+.card > div:first-of-type aside div {
+  width: 0.5em;
+  height: 0.5em;
   border-radius: 50%;
   box-shadow: inset 0 0 8px red;
 }
-.card > div {
-  display: grid;
-  place-items: center;
-  margin-bottom: 0.1em;
-  margin-top: -0.3em;
+.card > div:nth-of-type(2) {
+  display: flex;
+  margin-bottom: 0.5em;
+  margin-top: 0.2em;
 }
-.card > div img {
-  width: 100%;
-  height: 90%;
+.card > div:nth-of-type(2) img {
+  width: 85%;
+  margin-left: auto;
+  margin-right: auto;
+  object-fit: contain;
   border: 0.4em outset;
   filter: saturate(1.5);
   border-color: #8effee;
@@ -375,20 +511,22 @@ body:has(div.active) footer {
 }
 .card figcaption {
   width: 100%;
-  max-height: 6.5em;
-  padding: 0.5em;
+  max-height: 5.5em;
+  padding: 0.5em 1em;
   text-overflow: ellipsis;
-  font-size: 0.7em;
+  font-size: 0.5em;
   border-radius: 0.1em;
   box-shadow: 0 0 0 0.2em #00a58c, inset 0 0 1em #08fdd8;
   overflow: hidden;
 }
 .card footer {
-  position: relative;
-  margin-top: 0.4em;
+  position: absolute;
+  color: black;
+  top: 101%;
+  transform: translate(10%, 0%);
 }
 .card footer p {
-  font-size: 0.5em;
+  font-size: 0.3em;
 }
 .card footer::before, .card footer::after {
   content: "";
@@ -410,14 +548,6 @@ body:has(div.active) footer {
   transform: rotate(45deg);
 }
 
-@keyframes rotation {
-  from {
-    transform: rotateY(0deg);
-  }
-  to {
-    transform: rotateY(360deg);
-  }
-}
 .scanner {
   position: relative;
   perspective: 62.5em;
@@ -436,7 +566,7 @@ body:has(div.active) footer {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5019607843), 0 0 15px rgba(0, 0, 0, 0.7490196078) inset;
   transform-style: preserve-3d;
   transform-origin: center bottom;
-  transform: translate(-50%, 55%) rotateX(90deg) translate3d(0, -15em, -0.8em);
+  transform: translate(-50%, 30%) rotateX(90deg) translate3d(0, -15em, -0.8em);
 }
 .scanner > div:first-of-type span {
   display: block;
@@ -488,7 +618,7 @@ body:has(div.active) footer {
   border-color: #1c2437;
   background-color: #29344e;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5019607843), 0 0 15px rgba(0, 0, 0, 0.7490196078) inset;
-  transform: translate(-50%, 53.7em);
+  transform: translate(-50%, 45.7em);
 }
 
 @keyframes card-scan {
@@ -572,6 +702,19 @@ body:has(div.active) footer {
 #readMe a:active {
   color: darkblue;
 }
+#readMe section {
+  display: grid;
+  gap: 2.5em;
+  margin-top: 2em;
+}
+#readMe section div {
+  display: grid;
+  place-items: center;
+}
+#readMe section div p {
+  color: black;
+  margin-bottom: 0.5em;
+}
 #readMe .close {
   position: absolute;
   top: 2%;
@@ -585,6 +728,10 @@ body:has(div.active) footer {
 }
 #readMe .close:hover {
   color: #e60de6;
+}
+
+.red {
+  background-color: red;
 }
 
 /*# sourceMappingURL=style.css.map */

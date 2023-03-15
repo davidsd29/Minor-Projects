@@ -10,6 +10,11 @@ h3 {
     color: color(tertiary);
 }
 
+html {
+    scroll-behavior: smooth;
+    // scroll-snap-type: both mandatory;
+}
+
 body,
 html {
     height: 100%;
@@ -27,8 +32,6 @@ body {
     color: color(quaternary);
     color-scheme: light dark;
     background-color: color(secondary);
-    scroll-behavior: smooth;
-    scroll-snap-type: both mandatory;
     perspective: 1000px;
 
 

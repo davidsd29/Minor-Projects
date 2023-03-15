@@ -1,41 +1,40 @@
 import gitLogo from '../assets/img/github_logo.png';
 import monster from '../assets/img/test.webp';
-// import ReplanishData from './API/Fetch';
 
-// const repoInfo  = await ReplanishData("repo");
-// let repoInfo = await ReplanishData("repo");
+function RepoCard(card) {
+    let repoDescription;
 
+    if (card.data.description != null) {
+        repoDescription = card.data.description;
+    } else {
+        repoDescription = "There is no description for this repo...";
+    }
 
-// async function RepoCard() {
-function RepoCard() {
+    console.log(card.data);
 
-    //  console.log( typeof(repoInfo)  )
-
-    // for (let i = 0; i < repoInfo.length; i++) {
-        // console.log(repoInfo.length)
-    
         return (
-            <label className="card" data-value="606138795">
+            <label className="card" data-value={card.data.id}>
                 <input type="radio" name="card" id="open"/>
                 <header>
-                    <h4>Name</h4>
+                    <h4>{card.data.name}</h4>
                     <img src={gitLogo} alt="Github Logo" />
                 </header>
 
-                {/* coding langueage */}
-                <aside>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                </aside>
+                <div>
+                    {/* coding langueage */}
+                    <p>{card.data.language}</p>
+                    <aside>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </aside>
+                </div>
 
                 <div>
                     <img src={monster} alt="" />
                 </div>
 
-                <figcaption>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam gravida lacinia urna id elementum. Aliquam nibh nisi, imperdiet sit amet lectus quis, accumsan vestibulum odio. Praesent pharetra augue et dui feugiat, vel dictum dui auctor. Duis sem tortor, tincidunt sit amet lacus finibus
-                </figcaption>
+                <figcaption>{repoDescription}</figcaption>
 
                 <footer>
                     <p>&#xA9; Web Development, David Customs</p>

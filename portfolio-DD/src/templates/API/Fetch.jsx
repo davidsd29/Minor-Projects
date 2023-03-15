@@ -8,12 +8,31 @@ function GetFetchLink(information) {
 }
 
 async function GetRepo(repo, owner) {
+    let project;
+    const link = {
+        repo: document.querySelector("#readMe div:first-of-type a"),
+        project: document.querySelector("#readMe div:last-of-type a"),
+    }
+    console.log(repo.homepage)
+    if (repo.homepage !== null) {
+        project = "Get ready...";
+    } else {
+        project = "Unfortunately there is no link to this project";
+    }
+
     try {
-        fetch(`https://raw.githubusercontent.com/${owner}/${repo}/main/README.md`)
+        fetch(`https://raw.githubusercontent.com/${owner}/${repo.name}/main/README.md`)
             .then(response => response.text())
             .then(result => {
                 document.querySelector('#readMe article').innerHTML = markdownParser(result)
             });
+
+            link.project.setAttribute("href", repo.homepage);
+            link.project.textContent = project;
+
+            link.repo.setAttribute("href", repo.html_url);
+            link.repo.textContent = "Check out my git!";
+
     } catch (error) {
         console.log(error);
     }
@@ -56,7 +75,7 @@ async function GetSelectedGitRepo(infoType, id) {
     const repos = await GetData(GetFetchLink(infoType));
 
     repos.forEach(repo => {
-        if (repo.id == id) GetRepo(repo.name, user.login);
+        if (repo.id == id) GetRepo(repo, user.login);
     });
 }
 
