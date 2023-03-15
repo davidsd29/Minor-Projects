@@ -1,0 +1,453 @@
+
+body:has(div.active) header,
+body:has(div.active) main,
+body:has(div.active) footer {
+	filter: blur(10px);
+}
+[data-repo-length="0"] {
+	$repo-count: 0;
+}
+
+[data-repo-length="1"] {
+	$repo-count: 1;
+}
+
+[data-repo-length="2"] {
+	$repo-count: 2;
+}
+
+[data-repo-length="3"] {
+	$repo-count: 3;
+}
+
+[data-repo-length="4"] {
+	$repo-count: 4;
+}
+
+[data-repo-length="5"] {
+	$repo-count: 5;
+}
+
+[data-repo-length="6"] {
+	$repo-count: 6;
+}
+
+[data-repo-length="7"] {
+	$repo-count: 7;
+}
+
+[data-repo-length="8"] {
+	$repo-count: 8;
+}
+
+[data-repo-length="9"] {
+	$repo-count: 9;
+}
+
+[data-repo-length="10"] {
+	$repo-count: 10;
+}
+
+#repository {
+	height: 71em;
+
+	h2 {
+		margin-bottom: 6em;
+	}
+}
+
+.carousel-container {
+	margin: 4% auto;
+	width: 210px;
+	height: 50px;
+	position: relative;
+	perspective: 1000px;
+
+	#carousel {
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		transform-style: preserve-3d;
+		animation: rotation 20s infinite linear;
+
+		&:hover {
+			animation-play-state: paused;
+		}
+
+		&:has(input:checked) {
+			animation-play-state: paused;
+		}
+	}
+}
+
+.card {
+	position: absolute;
+	left: 10px;
+	top: 10px;
+	display: block;
+	max-width: 18em;
+	width: 100%;
+	height: 19em;
+	padding: 0.5em 1.5em;
+	color: color(tertiary);
+	box-shadow: 0 0 1.5em 4px color(quaternary), 0 0 0.2em 1em color(tertiary),
+		inset 0 0 50px 10px color(tertiary);
+
+	z-index: 1;
+	-webkit-transform-style: preserve-3d;
+	-webkit-backface-visibility: hidden;
+
+	&.checked {
+		background-color: red;
+		animation-name: pick-Card;
+		animation-duration: 10s;
+		animation-timing-function: linear;
+		animation-iteration-count: 1;
+	}
+
+	&:hover {
+		color: color(secondary);
+		background-color: skyblue;
+	}
+
+	&:after {
+		content: '';
+		right: 0px;
+		bottom: 0px;
+		position: absolute;
+		top: 0px;
+		left: 0px;
+		background-image: url("../img/yugioh_backside.png");
+		background-position: center;
+		filter: invert(1) hue-rotate(-67deg);
+		box-shadow: inset 0 0 50px 10px #ffd400;
+		-webkit-transform: rotateY(180deg);
+		-webkit-transform-style: preserve-3d;
+		-webkit-backface-visibility: hidden;
+	}
+
+
+
+
+	@for $i from 1 through variable(repo-count)  {
+		&:nth-child(#{$i}) {
+			transform: rotateY($i * 40deg) translateZ(400px);
+		}
+	}	
+
+
+	input {
+		display: none;
+	}
+
+	header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 0.1em 0.5em;
+		margin-bottom: 0.2em;
+		border-style: outset;
+		border-color: #8effee;
+		border-block-end-color: #00a58c;
+
+		img {
+			width: 1.2em;
+			height: 1.2em;
+			object-fit: contain;
+			border-radius: 50%;
+			border: 1px solid color(tertiary);
+		}
+	}
+
+	aside {
+		display: flex;
+		justify-content: end;
+		gap: 0.2em;
+
+		div {
+			width: .7em;
+			height: .7em;
+			border-radius: 50%;
+			box-shadow: inset 0 0 8px red;
+		}
+	}
+
+	> div {
+		display: grid;
+		place-items: center;
+		margin-bottom: 0.1em;
+		margin-top: -0.3em;
+
+		img {
+			width: 100%;
+			height: 90%;
+			border: 0.4em outset;
+			filter: saturate(1.5);
+			border-color: #8effee;
+			border-block-end-color: #00a58c;
+		}
+	}
+
+	figcaption {
+		width: 100%;
+		max-height: 6.5em;
+		padding: .5em;
+		text-overflow: ellipsis;
+		font-size: .7em;
+		border-radius: .1em;
+		box-shadow: 0 0 0 0.2em #00a58c, inset 0 0 1em color(tertiary);
+		overflow: hidden;
+	}
+
+	footer {
+		position: relative;
+		margin-top: .4em;
+
+		p {
+			font-size: .5em;
+		}
+
+		&::before,
+		&::after {
+			content: "";
+			position: absolute;
+			bottom: -5.5em;
+			left: -20%;
+			width: .2em;
+			height: 4em;
+			background-color: #00eaff;
+			transform-style: preserve-3d;
+			transform-origin: center top;
+			transform: rotate(-45deg);
+			opacity: .2;
+			box-shadow: inset 0 0 8em #4ca8cc,
+				0 -10em 10em 33px #4ca8cc,
+				0 1em 4em 6em #4ca8cc;
+		}
+
+		&::after {
+			right: -20%;
+			left: auto;
+			transform: rotate(45deg);
+		}
+	}
+}
+
+@keyframes rotation {
+	from {
+		transform: rotateY(0deg);
+	}
+
+	to {
+		transform: rotateY(360deg);
+	}
+}
+
+.scanner {
+	position: relative;
+	perspective: 62.5em;
+
+	>div {
+
+		&:first-of-type {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+
+			height: 40em;
+			width: 30em;
+			padding: 2em;
+
+			background-color: #39496e;
+			border-radius: .8em .8em 0 0;
+			border-style: outset;
+			border-color: #1c2437;
+			box-shadow: 0 0 10px #00000080, 0 0 15px #000000bf inset;
+
+			transform-style: preserve-3d;
+			transform-origin: center bottom;
+			transform: translate(-50%, 55%) rotateX(90deg) translate3d(0, -15em, -.8em);
+
+			span {
+				display: block;
+				height: 90%;
+				width: 100%;
+				border-radius: inherit;
+				border-style: outset;
+				border: .3em solid color(secondary);
+				box-shadow: inset 0 0 8em #4b7a8d,
+					inset 0 0 2em color(secondary),
+					0 -10em 34em 83px #4b7a8d;
+				background-color: #00fff2;
+				overflow: hidden;
+			
+
+				.scan-line {
+					height: calc(100% - 2px);
+					width: 100%;
+					background: linear-gradient(180deg, rgba(0, 255, 51, 0) 43%, #00ff37 211%);
+					border-bottom: 3px solid color(tertiary);
+					transform: translateY(-100%);
+					animation: card-scan 2s infinite;
+					animation-timing-function: cubic-bezier(0.53, 0, 0.43, 0.99);
+					animation-delay: 1.4s;
+					
+				}
+
+				table {
+					position: absolute;
+					width: 83%;
+					height: 78%;
+				}
+
+				td {
+					border: 1px dashed #003af841;
+					position: relative;
+					cursor: pointer;
+					transition: background-color 150ms ease-in-out;
+
+					&.dot:after {
+						content: "•";
+						position: absolute;
+						top: -9.55px;
+						left: -3.8px;
+						font-size: 18px;
+						color: #0e46fc81;
+					}
+				}
+			}
+		}
+
+		&#bottom {
+			position: absolute;
+			bottom: 50%;
+			left: 50%;
+			height: 3em;
+			width: 24.2em;
+			border-style: outset;
+			border-color: #1c2437;
+			background-color: #29344e;
+			box-shadow: 0 0 10px #00000080, 0 0 15px #000000bf inset;
+			transform: translate(-50%, 53.7em);
+		}
+	}
+}
+
+		
+
+@keyframes card-scan {
+	0% {
+		transform: translateY(-100%);
+	}
+
+	100% {
+		transform: translateY(0);
+	}
+}
+
+@keyframes pick-Card {
+
+	40% {
+		transition-timing-function: cubic-bezier(0.010, 0.620, 0.355, 1.000);
+		transform: translate(-50%, 0%) translate3d(-7em, 0em, 18.2em) rotateY(-39deg);
+	}
+
+	50% {
+		transform: translate(-50%, 0%) translate3d(5em, 0em, 3.2em) rotateY(-40deg);
+	}
+
+	60% {
+		transform: translate3d(-7em, 2em, 9.2em) rotateY(-39deg);
+	}
+
+	70% {
+		transform: translate(-50%, 55%) rotateX(90deg) translate3d(6em, 8em, 12.2em) rotate(1deg);
+	}
+
+	80% {
+		transform: translate(-50%, 55%) rotateX(90deg) translate3d(6em, 8em, 4.2em) rotate(1deg) scale(.6);
+	}
+
+	100% {
+		transition-timing-function: cubic-bezier(0.860, -0.005, 1.000, 1.000);
+		transform: translate(-50%, 55%) rotateX(90deg) translate3d(6em, 28em, 4.2em) rotate(1deg) scale(.6);
+	}
+	
+}
+
+#readMe {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	width: 40%;
+	height: auto;
+	padding: 1em;
+	box-shadow: 0 0 1.5em 4px #FFFFFF,
+		0 0 0.2em 1em color(tertiary),
+		inset 0 0 15em 1.8em color(tertiary);
+	background-color: skyblue;
+	opacity: 0;
+	visibility: hidden;
+	text-align: center;
+	transform: translate(-50%, -50%) scale(0.9);
+	transition: all .3s;
+	z-index: 10;
+
+	&.active {
+		visibility: visible;
+		opacity: 1;
+		transform: translate(-50%, -50%) scale(1);
+	}
+
+	h1 {
+		margin: 1em auto;
+	}
+	
+	img {
+		width: 70%;
+		max-width: 18em;
+		margin-bottom: 2em;
+		margin-left: 11%;
+		margin-right: 11%;
+		object-fit: contain;
+		border: 0.4em outset;
+		border-color: skyblue;
+		border-block-end-color: #517a8a;
+	}
+
+	a {
+		color: dodgerblue;
+		font-style: italic;
+		&:focus-within {
+			color: color(quaternary);
+		}
+	
+		&:hover {
+			color: color(hover);
+		}
+	
+		&:focus {
+			color: color(focus);
+		}
+	
+		&:active {
+			color: color(active);
+		}
+	}
+
+	.close {
+		position: absolute;
+		top: 2%;
+		right: 5%;
+		font-size: 1.1em;
+		letter-spacing: 0.05rem;
+		color: dodgerblue;
+		text-shadow: 1px 1px 2px color(quaternary), 0 0 1em dodgerblue, 0 0 0.2em skyblue;
+		transition: all .4s;
+		cursor: pointer;
+
+		&:hover {
+			color: color(hover);
+		}
+	}
+}

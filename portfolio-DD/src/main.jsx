@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import {IntroText, IntroAnimation} from './templates/Intro';
 import {Carousel} from './templates/Repository';
-import {RepoCard} from './templates/Card';
 import {AboutText, LangueageBol} from './templates/About';
 import './assets/css/style.css';
 
@@ -20,30 +19,34 @@ import './assets/css/style.css';
     </React.StrictMode>,
   );
 
-  ReactDOM.createRoot(document.getElementById('repository')).render(
+  ReactDOM.createRoot(document.querySelector('main')).render(
     <React.StrictMode>
+      <section id="github-repos">
         <Carousel />
-        {/* <RepoCard /> */}
-        
-      <div>
-          <a href="#about" className='further'> Click me</a>
-      </div>
-    </React.StrictMode>,
-  );
 
-  ReactDOM.createRoot(document.getElementById('about')).render(
-    <React.StrictMode>
-      <h2>About me</h2>
-      <div>
-        <AboutText />
-        <LangueageBol />
-      </div>
-        
-      <div>
-          <a href="#contact" className='further'>
-            <p>Contact me</p>
-          </a>
-      </div>
+        <div>
+            <a href="#about" className='further'> 
+              <p>Click me</p>
+            </a>
+        </div>
+      </section>
+
+      <section id='about'>
+        <h2>About me</h2>
+
+        <div>
+          <AboutText />
+          <LangueageBol />
+        </div>
+          
+        <div>
+            <a href="#contact" className='further'>
+              <p>Contact me</p>
+            </a>
+        </div>
+
+      </section>
+
     </React.StrictMode>,
   );
 

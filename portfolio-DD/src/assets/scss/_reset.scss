@@ -5,3 +5,31 @@ a {
 ul {
     list-style: none;
 }
+
+h3 {
+    color: color(tertiary);
+}
+
+body,
+html {
+    height: 100%;
+}
+
+body {
+    display: gird;
+    place-content: center;
+    place-items: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 5em;
+    max-width: 80em;
+    color: color(quaternary);
+    color-scheme: light dark;
+    background-color: #242424;
+    scroll-behavior: smooth;
+    scroll-snap-type: both mandatory;
+    perspective: 1000px;
+
+    
+}

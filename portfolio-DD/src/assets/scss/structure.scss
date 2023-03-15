@@ -4,18 +4,19 @@
     text-decoration: none;
     text-align: center;
     cursor: pointer;
-    color: color(primary);
-    background-color: color(tertiary);
-    border: none;
+    color: color(tertiary);
+    border: 2px solid color(tertiary);
     border-radius: 1em;
+    box-shadow: inset 0 0 10px 5px color(tertiary), 0 0 10px 5px #4b7a8d;
 
     &:focus-within {
         color: color(quaternary);
     }
 
     &:hover {
-        background-color: color(hover);
-        color: color(quaternary);
+        color: color(hover);
+        border-color: color(hover);
+        box-shadow: inset 0 0 10px 5px color(hover), 0 0 10px 5px #854b8d;
     }
 
     &:focus {
@@ -27,33 +28,9 @@
     }
 }
 
-h3 {
-    color: color(tertiary);
-}
-body, html {
-    height: 100%;
-}
-
-body {
-    display: gird;
-    place-content: center;
-    place-items: center;
-    justify-content: center;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 5em;
-    max-width: 80em;
-    color: color(quaternary);
-    color-scheme: light dark;
-    background-color: #242424;
-    scroll-behavior: smooth;
-    scroll-snap-type: both mandatory;
-    perspective: 1000px;
-    transform-style: preserve-3d;
-    overflow: hidden;
-}
 
 main {
+    scroll-margin: 2em;
     >section {
         margin: 6em 0;
         scroll-snap-align: center;
@@ -79,6 +56,13 @@ main {
 
     @include respond-to(up-to-md) {
         grid-template-columns: 1fr;
+    }
+
+    h1 {
+        -webkit-text-stroke: 2px color(tertiary);
+        color: transparent;
+            /* width and color */
+        text-shadow: 1px 1px 2px transparent, 0 0 0.2em color(tertiary);
     }
 
     section {
@@ -143,6 +127,7 @@ main {
 
     p { 
         position: absolute;
+        text-shadow: 1px 1px 2px darkcyan, 0 0 0.2em color(tertiary);
         animation: Bounce 1s linear infinite alternate;
 
         &::before,
@@ -153,7 +138,7 @@ main {
             left: -13%;
             width: 2.5em;
             height: .1em;
-            background-color: color(quaternary);
+            background-color: color(tertiary);
             transform: rotate(25deg);
         }
         
