@@ -4,6 +4,7 @@ body:has(div.active) main,
 body:has(div.active) footer {
 	filter: blur(10px);
 }
+
 [data-repo-length="0"] {
 	$repo-count: 0;
 }
@@ -105,32 +106,101 @@ body:has(div.active) footer {
 	}
 }
 
-
-@keyframes scan {
+@keyframes glitch1 {
 	0% {
-		transform:
-			rotateY(var(--rY, 0deg)) translatez(30vmin);
+		transform: notranslate(-50%, -50%) scale(2.5)ne;
+		opacity: 1;
+	}
+
+	7% {
+		opacity: 0.75;
+	}
+
+	10% {
+		transform: translate(-50%, -50%) scale(2.5);
+		opacity: 1;
+	}
+
+	27% {
+		transform: translate(-50%, -50%) scale(2.5);
+		opacity: 1;
+	}
+
+	30% {
+		transform: translate(-50%, -50%) scale(2.5) skew(0.8deg, -0.1deg);
+		opacity: 0.75;
+	}
+
+	35% {
+		transform: translate(-50%, -50%) scale(2.5);
+		opacity: 1;
+	}
+
+	52% {
+		transform: translate(-50%, -50%) scale(2.5);
+		opacity: 1;
+	}
+
+	55% {
+		transform: translate(-50%, -50%) scale(2.5) skew(-1deg, 0.2deg);
+		opacity: 0.75;
 	}
 
 	50% {
-		transform:
-			rotateY(calc(var(--deltaRY) * -1)) translateY(5em) rotateX(70deg) translateY(-50vmin);
+		transform: translate(-50%, -50%) scale(2.5);
+		opacity: 1;
+	}
+
+	72% {
+		transform: translate(-50%, -50%) scale(2.5);
+		opacity: 1;
+	}
+
+	75% {
+		opacity: 0.75;
 	}
 
 	80% {
+		opacity: 1;
+	}
+
+	100% {
+		transform: translate(-50%, -50%) scale(2.5);
+		opacity: 1;
+	}
+}
+
+
+
+@keyframes scan {
+
+	0% {
+		opacity: 1;
 		transform:
-			 translateY(100%) rotateX(70deg) translateY(60vmin) rotateY(calc(var(--deltaRY) * -1));
-	}	
+			rotateY(var(--cardY, 0deg)) translatez(30vmin);
+	}
+
+	50% {
+		opacity: 1;
+		transform:
+			rotateY(calc(var(--caroY) * -1)) translateY(100%) rotateX(70deg) translateY(-50vmin);
+	}
+	60%, 70%{ opacity: 1;}
+	
+
+	80% {
+			opacity: 1;
+	}
+	
+	88% {
+			opacity: 0;
+	}
 	
 	100% {
 		transform:
-			translateY(100%) rotateX(70deg) translateY(60vmin) rotateY(calc(var(--deltaRY) * -1))
-	}	
-	
-	// 100% {
-	// 	transform:
-	// 		 translateY(60vmin) rotateX(70deg) rotateY(calc(var(--deltaRY) * -1)); 
-	// }
+			rotateY(calc(var(--caroY) * -1)) translateY(100%) rotateX(70deg) translateX(1em) translateY(50vmin) ;
+			opacity: 0;
+	}
 }
 
 .card {
@@ -146,27 +216,23 @@ body:has(div.active) footer {
 	animation: color 5s linear infinite;
 	box-shadow: 0 0 1.5em 4px color(quaternary), 0 0 0.2em 1em color(tertiary),
 		inset 0 0 50px 10px color(tertiary);
+		
 
 	z-index: 1;
 	-webkit-transform-style: preserve-3d;
 	-webkit-backface-visibility: hidden;
+	transform:rotateY(var(--cardY, 0deg)) translateZ(40vmin);
 
-	transform:rotateY(var(--rY, 0deg)) translateZ(40vmin);
-		
-
-	&.checked {
-		background-color: red;
-		animation-name: pick-Card;
-		animation-duration: 10s;
-		animation-timing-function: linear;
-		animation-iteration-count: 1;
-	}
 
 	&.scan {
 		animation-name: scan;
 		animation-duration: 5s;
 		animation-timing-function: ease-in-out;
 		animation-fill-mode: forwards;
+		animation-iteration-count: 1;
+		transform:
+				rotateY(calc(var(--caroY) * -1)) translateY(100%) rotateX(70deg) translateX(1em) translateY(50vmin);
+			// opacity: 0;
 	}
 
 	&:hover {
@@ -193,7 +259,7 @@ body:has(div.active) footer {
 
 	@for $i from 1 through variable(repo-count)  {
 		&:nth-child(#{$i}) {
-			--rY: #{$i * 40deg};
+			--cardY: #{$i * 50deg};
 		}
 	}
 
@@ -352,18 +418,35 @@ body:has(div.active) footer {
 					0 -10em 34em 83px #4b7a8d;
 				background-color: #00fff2;
 				overflow: hidden;
-			
 
+				&.blink {
+					&::before{
+						animation: blink .5s infinite alternate;
+					}
+				}
+
+				&::before {
+						content: "";
+						position: absolute;
+						bottom: 2.5em;
+						width: 1.5em;
+						height: 1.5em;
+						background-color: red;
+						border-radius: 50%;
+    					background-image: radial-gradient(at 40% 30%, #ff5050 10%, #ff0000 20%, #700101 60%);
+						box-shadow: 0 0 .4em color(secondary);
+					}
+			
 				.scan-line {
 					height: calc(100% - 2px);
 					width: 100%;
 					background: linear-gradient(180deg, rgba(0, 255, 51, 0) 43%, #00ff37 211%);
 					border-bottom: 3px solid color(tertiary);
 					transform: translateY(-100%);
-					animation: card-scan 2s infinite;
-					animation-timing-function: cubic-bezier(0.53, 0, 0.43, 0.99);
-					animation-delay: 1.4s;
 					
+					&.scan-line-scanning {
+						animation: card-scan 2s cubic-bezier(0.53, 0, 0.43, 0.99) infinite alternate;
+					}
 				}
 
 				table {
@@ -388,6 +471,40 @@ body:has(div.active) footer {
 					}
 				}
 			}
+
+			#text-screen {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				background-color: color(primary);
+				// background-color: #ccc;
+				height: 8%;
+				width: 80%;
+				margin-top: .9em;
+				margin-left: auto;
+				margin-right: auto;
+				border-radius: .5em;
+				border: 3px solid color(secondary);
+				box-shadow: 0 0 10px rgba(0, 0, 0, 0.5019607843),
+				0 0 1.5em color(secondary) inset,
+				0 0 1.5em color(secondary) inset;
+				font-size: 1.5em;
+
+				p {
+					opacity: 0;
+					transition: 1s;
+				}
+
+				&.loading {
+					cursor: wait;
+					box-shadow: inset 0 3px 1em .2em color(secondary);
+					background-color: #00fff2;
+				
+					p {
+						opacity: 1;
+					}
+				}
+			}
 		}
 
 		&#bottom {
@@ -401,11 +518,42 @@ body:has(div.active) footer {
 			background-color: #29344e;
 			box-shadow: 0 0 10px #00000080, 0 0 15px #000000bf inset;
 			transform: translate(-50%, 45.7em);
+
+			&::before {
+				content: "Select your card";
+				position: absolute;
+				bottom: 19em;
+				left: 50%;
+				max-width: 9em;
+				// height: 1.5em;
+				color: transparent;
+				text-align: center;
+				-webkit-text-stroke: 1px color(tertiary);
+				text-shadow: 0 0 1em #4ca8cc, 0 0 0.2em #4ca8cc;
+				text-transform: uppercase;
+				transform: translate(-50%, -50%) scale(2.5);
+				animation: glitch1 2.5s infinite;
+				transition: 5s;
+					
+			}
+
+			&.hide-text {
+				&::before {
+					animation: hide-text 2.5s linear 2s;
+				}
+			}
+
+			&.hidden {
+				&::before {
+					animation: none;
+					opacity: 0;
+				}
+			}
 		}
 	}
 }
+	
 
-		
 
 @keyframes card-scan {
 	0% {
@@ -417,35 +565,21 @@ body:has(div.active) footer {
 	}
 }
 
-@keyframes pick-Card {
-
-	40% {
-		transition-timing-function: cubic-bezier(0.010, 0.620, 0.355, 1.000);
-		transform: translate(-50%, 0%) translate3d(-7em, 0em, 18.2em) rotateY(-39deg);
+@keyframes blink {
+	to {
+		box-shadow: 0 0 .4em color(secondary), inset 0 0 1em red, 0 0 1em .2em red;
 	}
-
-	50% {
-		transform: translate(-50%, 0%) translate3d(5em, 0em, 3.2em) rotateY(-40deg);
-	}
-
-	60% {
-		transform: translate3d(-7em, 2em, 9.2em) rotateY(-39deg);
-	}
-
-	70% {
-		transform: translate(-50%, 55%) rotateX(90deg) translate3d(6em, 8em, 12.2em) rotate(1deg);
-	}
-
-	80% {
-		transform: translate(-50%, 55%) rotateX(90deg) translate3d(6em, 8em, 4.2em) rotate(1deg) scale(.6);
-	}
-
-	100% {
-		transition-timing-function: cubic-bezier(0.860, -0.005, 1.000, 1.000);
-		transform: translate(-50%, 55%) rotateX(90deg) translate3d(6em, 28em, 4.2em) rotate(1deg) scale(.6);
-	}
-	
 }
+
+@keyframes hide-text {
+	to {
+		opacity: 0;
+		bottom: 11em;
+		transform: translate(-50%, -50%) scale(1.5);
+	}
+}
+
+
 
 #readMe {
 	position: fixed;
@@ -463,7 +597,7 @@ body:has(div.active) footer {
 	text-align: center;
 	transform: translate(-50%, -50%) scale(0.9);
 	transition: all .3s;
-	z-index: 10;
+	z-index: 10;	
 
 	&.active {
 		visibility: visible;

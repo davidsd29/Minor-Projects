@@ -46,7 +46,7 @@ const markdownParser = (text) => {
 		.replace(/^# (.*$)/gim, '<h1>$1</h1>') // h1 tag
 		.replace(/\*\*(.*)\*\*/gim, '<b>$1</b>') // bold text
 		.replace(/\*(.*)\*/gim, '<i>$1</i>') // italic text
-        .replace(/\[(.*?)\]\((.*?)\)/gim, "<a href='$2'>$1</a>"); // link
+        .replace(/\[(.*?)\]\((.*?)\)/gim, "<a href='$2'>$1</a>"); // l0ink
 	return toHTML.trim(); // using trim method to remove whitespace
 }
 
@@ -63,6 +63,7 @@ async function GetData(url) {
         console.log(error);
     }
 }
+
 
 async function ReplanishData(infoType) {
 	const data = await GetData(GetFetchLink(infoType));

@@ -1,7 +1,5 @@
+import { useEffect } from 'react'
 
-const font = {
-    big: "font-size: 2.83ex"
-}
 
 function AboutText() {
 
@@ -23,14 +21,17 @@ function AboutText() {
 
         <q>The best way to find out is to do it</q>
 
-    </article>
-
-    
+    </article>  
   )
 }
 
+
 function LangueageBol() {
-    createCanvas();
+
+  useEffect(() => {
+    CreateCanvas();
+  }, []);
+
   return (
       <aside>
         <div id="myCanvasContainer">
@@ -66,7 +67,8 @@ function LangueageBol() {
   )
 }
 
-function createCanvas() {
+
+function CreateCanvas() {
     // words canvas
     let myCanvas = document.getElementById("myCanvas"),
         canvasContainer = document.getElementById("myCanvasContainer");
@@ -74,7 +76,6 @@ function createCanvas() {
     let color = "#08fdd8",
         outlineColour = "#e60de6";
     
-
     //check if myCanvas exits
     if (myCanvas !== null) {
 
