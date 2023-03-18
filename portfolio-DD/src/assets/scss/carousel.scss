@@ -3,51 +3,6 @@ body:has(div.active) header,
 body:has(div.active) main,
 body:has(div.active) footer {
 	filter: blur(10px);
-}
-
-[data-repo-length="0"] {
-	$repo-count: 0;
-}
-
-[data-repo-length="1"] {
-	$repo-count: 1;
-}
-
-[data-repo-length="2"] {
-	$repo-count: 2;
-}
-
-[data-repo-length="3"] {
-	$repo-count: 3;
-}
-
-[data-repo-length="4"] {
-	$repo-count: 4;
-}
-
-[data-repo-length="5"] {
-	$repo-count: 5;
-}
-
-[data-repo-length="6"] {
-	$repo-count: 6;
-}
-
-[data-repo-length="7"] {
-	$repo-count: 7;
-}
-
-[data-repo-length="8"] {
-	$repo-count: 8;
-}
-
-[data-repo-length="9"] {
-	$repo-count: 9;
-}
-
-[data-repo-length="10"] {
-	$repo-count: 10;
-}
 
 #repository {
 	height: 60em;
@@ -232,7 +187,6 @@ body:has(div.active) footer {
 		animation-iteration-count: 1;
 		transform:
 				rotateY(calc(var(--caroY) * -1)) translateY(100%) rotateX(70deg) translateX(1em) translateY(50vmin);
-			// opacity: 0;
 	}
 
 	&:hover {
@@ -583,8 +537,6 @@ body:has(div.active) footer {
 
 #readMe {
 	position: fixed;
-	top: 50%;
-	left: 50%;
 	width: 40%;
 	height: auto;
 	padding: 1em;
@@ -600,11 +552,19 @@ body:has(div.active) footer {
 	z-index: 10;	
 
 	&.active {
+		top: 50%;
+		left: 50%;
 		visibility: visible;
 		opacity: 1;
 		transform: translate(-50%, -50%) scale(1);
 	}
 
+	article {
+		overflow-y: scroll;
+		max-height: 20em;
+		padding: 1em;
+		 text-align: left;
+	}
 	h1 {
 		margin: 1em auto;
 	}

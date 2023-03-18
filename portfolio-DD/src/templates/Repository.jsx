@@ -14,21 +14,7 @@ const readme = {
 let repoCount = repoInfo.length;
 
 // document.body.style.setProperty('--eye'+sliderID+'-value',sliderValue+'%');
-// main.setAttribute('data-repo-length', repoCount);
 
-// class MyComponent extends React.Component {
-//   constructor(props) {
-//     super(props);
-//     // create a ref to store the textInput DOM element
-//     this.carousel = React.createRef();
-//   }
-
-// }
-
-//   const node = this.carousel.current;
-//   console.log(node)
-// const carousel = this;
-console.log(repoInfo);
 function Carousel() {
 	const cardItems = repoInfo.map((item) => {
 		if (item.archived == false) return <RepoCard data={item} />;
@@ -37,7 +23,7 @@ function Carousel() {
 	useEffect(() => {
 		document.body.style.setProperty('--repo-length', repoCount);
 
-		const cards = document.querySelectorAll('.card');
+		const cards = document.querySelectorAll('.card input');
 		const scanner = {
 			scanText: document.getElementById('bottom'),
 			scanLine: document.querySelector('.scan-line'),
@@ -50,7 +36,6 @@ function Carousel() {
 			card.addEventListener('change', (e) => {
 				if (e.target.checked) {
 					scanner.scanText.classList.add('hide-text');
-					setTimeout;
 
 					setTimeout(() => {
 						scanner.scanText.classList.remove('hide-text');
@@ -65,10 +50,16 @@ function Carousel() {
 
 		readme.closeBtn.addEventListener('click', () => {
 			readme.frame.classList.remove('active');
-			scanText.classList.remove('hidden');
+			scanner.scanText.classList.remove('hidden');
 
 			cards.forEach((card) => {
-				if (card.checked) card.checked = false;
+				if (card.checked) {
+					card.parentElement.classList.remove('scan');
+					setTimeout(() => {
+
+					}, 5000);
+					card.checked = false;
+				}
 			});
 		});
 	}, []);
@@ -139,7 +130,6 @@ function Scanner() {
 }
 
 function OpenReadMe(card, scanner) {
-	console.log(scanner);
 	const repoID = Number(card.getAttribute('data-value'));
 	card.addEventListener('animationend', () => {
 		scanner.scanLine.classList.add('scan-line-scanning');
@@ -156,9 +146,5 @@ function OpenReadMe(card, scanner) {
 		}, 3900);
 	});
 }
-
-// window.addEventListener('load', () => {
-
-// })
 
 export { Carousel };

@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { Welcome } from './templates/Intro';
 import { Carousel } from './templates/Repository';
 import { AboutText, LangueageBol } from './templates/About';
 import './assets/css/style.css';
@@ -17,7 +16,6 @@ let typingeffect = new Typed(".multiText", {
 
 ReactDOM.createRoot(document.querySelector('main')).render(
 	<React.StrictMode>
-		{/* <Welcome /> */}
 
 		<section id="github-repos">
 			<Carousel />
