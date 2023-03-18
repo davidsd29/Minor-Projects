@@ -1,5 +1,5 @@
 import gitLogo from '../assets/img/github_logo.png';
-import monster from '../assets/img/test.webp';
+import monster from '../assets/img/monster.webp';
 
 
 function RepoCard(card) {

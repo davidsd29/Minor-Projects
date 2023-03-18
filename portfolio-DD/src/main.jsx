@@ -22,13 +22,13 @@ ReactDOM.createRoot(document.querySelector('main')).render(
 
 			<div className="click-me">
 				<a href="#about">
-					<p>Click me</p>
+					<p>Click</p>
 				</a>
 			</div>
 		</section>
 
 		<section id="about">
-			<h2>About me</h2>
+			<h2>About</h2>
 
 			<div>
 				<AboutText />
@@ -40,6 +40,11 @@ ReactDOM.createRoot(document.querySelector('main')).render(
 					<p>Back Up</p>
 				</a>
 			</div>
+
+			<footer>
+				<a href="https://daviddankwah.com/" target="_blank">David Customs</a>
+				<p>&#xA9; Web Development</p>
+			</footer>
 		</section>
 	</React.StrictMode>
 );

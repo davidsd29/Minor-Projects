@@ -1,19 +1,14 @@
 import { ReplanishData, GetSelectedGitRepo } from './API/Fetch';
 import { RepoCard } from './Card';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 
-const main = document.querySelector('main');
 const repoInfo = await ReplanishData('repo');
-const user = await ReplanishData('user');
-
 const readme = {
 	closeBtn: document.querySelector('#readMe .close'),
 	frame: document.getElementById('readMe'),
 };
 
 let repoCount = repoInfo.length;
-
-// document.body.style.setProperty('--eye'+sliderID+'-value',sliderValue+'%');
 
 function Carousel() {
 	const cardItems = repoInfo.map((item) => {
@@ -22,18 +17,42 @@ function Carousel() {
 
 	useEffect(() => {
 		document.body.style.setProperty('--repo-length', repoCount);
+	}, []);
 
+	return (
+		<section id="repository">
+			<div className="carousel-container">
+				<div id="carousel">
+					{/* check if card items is empty */}
+					{cardItems ? cardItems : <p>Loading items...</p>}
+				</div>
+			</div>
+
+			<Scanner />
+		</section>
+	);
+}
+
+function Scanner() {
+
+	useEffect(() => {
 		const cards = document.querySelectorAll('.card input');
 		const scanner = {
 			scanText: document.getElementById('bottom'),
 			scanLine: document.querySelector('.scan-line'),
 			lamp: document.querySelector('.scanner span'),
-			loading: document.getElementById('text-screen'),
+			textScreen: document.getElementById('text-screen'),
+			loadingText: document.querySelector('#text-screen p'),
+			loading: document.getElementById('loading'),
 		};
+
 
 
 		cards.forEach((card) => {
 			card.addEventListener('change', (e) => {
+
+				DisableCards(cards);
+
 				if (e.target.checked) {
 					scanner.scanText.classList.add('hide-text');
 
@@ -48,39 +67,21 @@ function Carousel() {
 			});
 		});
 
+
 		readme.closeBtn.addEventListener('click', () => {
 			readme.frame.classList.remove('active');
-			scanner.scanText.classList.remove('hidden');
+
+			EnableCards(cards);
 
 			cards.forEach((card) => {
 				if (card.checked) {
 					card.parentElement.classList.remove('scan');
-					setTimeout(() => {
-
-					}, 5000);
 					card.checked = false;
 				}
 			});
 		});
 	}, []);
 
-	return (
-		<section id="repository">
-			<h2>Github Repository's</h2>
-
-			<div className="carousel-container">
-				<div id="carousel">
-					{/* check if card items is empty */}
-					{cardItems ? cardItems : <p>Loading items...</p>}
-				</div>
-			</div>
-
-			<Scanner />
-		</section>
-	);
-}
-
-function Scanner() {
 	return (
 		<div className="scanner">
 			<div>
@@ -124,27 +125,73 @@ function Scanner() {
                 </div>
 
 			</div>
-			<div id="bottom"></div>
+
+			<Loading />
+
+			<div id="bottom">
+				<p>GitHub Repository's Scanner</p>
+			</div>
 		</div>
 	);
 }
 
-function OpenReadMe(card, scanner) {
-	const repoID = Number(card.getAttribute('data-value'));
-	card.addEventListener('animationend', () => {
-		scanner.scanLine.classList.add('scan-line-scanning');
-		scanner.lamp.classList.add('blink');
-		scanner.loading.classList.add('loading');
 
-		setTimeout(() => {
-			scanner.lamp.classList.remove('blink');
-			scanner.scanLine.classList.remove('scan-line-scanning');
-		    scanner.loading.classList.remove('loading');
+function Loading() {
+	return (
+		<section id='loading'>
+			<div className="circle"></div>
+			<div className="circle-small"></div>
+			<p>rendering</p>
+		</section>
 
-			GetSelectedGitRepo('repo', repoID);
-			readme.frame.classList.add('active');
-		}, 3900);
+	)
+}
+
+
+function DisableCards(cards) {
+	cards.forEach(card => {
+		if (!card.checked) card.setAttribute('disabled', true)
 	});
 }
 
-export { Carousel };
+
+function EnableCards(cards) {
+	cards.forEach(card => {
+		card.removeAttribute('disabled');
+	});
+}
+
+
+function OpenReadMe(card, scanner) {
+	const repoID = Number(card.getAttribute('data-value'));
+
+	card.addEventListener('animationend', () => {
+		scanner.scanLine.classList.add('scan-line-scanning');
+		scanner.lamp.classList.add('blink');
+		scanner.textScreen.classList.add('scanning-text');
+
+		setTimeout(() => {
+			scanner.scanLine.classList.remove('scan-line-scanning');
+			scanner.loadingText.textContent = "Scan Compleet";
+			scanner.loading.classList.add("load");
+		}, 4000);
+
+		setTimeout(() => {
+			scanner.loadingText.textContent = "Scan Compleet";
+		}, 3800);
+
+		setTimeout(() => {
+			scanner.loading.classList.remove("load");
+			scanner.lamp.classList.remove('blink');
+		    scanner.textScreen.classList.remove('scanning-text');
+			scanner.loadingText.textContent = "Scanning...";
+			scanner.scanText.classList.remove('hidden');
+
+
+			GetSelectedGitRepo('repo', repoID);
+			readme.frame.classList.add('active');
+		}, 7000);
+	});
+}
+
+export { Carousel }

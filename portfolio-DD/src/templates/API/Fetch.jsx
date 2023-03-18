@@ -9,11 +9,12 @@ function GetFetchLink(information) {
 
 async function GetRepo(repo, owner) {
     let project;
+
     const link = {
         repo: document.querySelector("#readMe div:first-of-type a"),
         project: document.querySelector("#readMe div:last-of-type a"),
     }
-    console.log(repo.homepage)
+    
     if (repo.homepage !== null) {
         project = "Get ready...";
     } else {
@@ -24,7 +25,11 @@ async function GetRepo(repo, owner) {
         fetch(`https://raw.githubusercontent.com/${owner}/${repo.name}/main/README.md`)
             .then(response => response.text())
             .then(result => {
-                document.querySelector('#readMe article').innerHTML = markdownParser(result)
+                if(result == "404: Not Found") {
+                    document.querySelector('#readMe article').innerHTML ="There is no readMe found for this repository... But"
+                } else {
+                    document.querySelector('#readMe article').innerHTML = markdownParser(result)
+                }
             });
 
             link.project.setAttribute("href", repo.homepage);
