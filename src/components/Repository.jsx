@@ -1,6 +1,7 @@
-import { ReplanishData, GetSelectedGitRepo } from './API/Fetch';
-import { RepoCard } from './Card';
+import { ReplanishData, GetSelectedGitRepo } from '../utils/Fetch.js';
+
 import React, { useEffect } from 'react';
+import RepoCard from './Card.jsx';
 
 const repoInfo = await ReplanishData('repo');
 const readme = {
@@ -194,4 +195,4 @@ function OpenReadMe(card, scanner) {
 	});
 }
 
-export { Carousel }
+export default Carousel;

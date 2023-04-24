@@ -42,4 +42,4 @@ function RepoCard(card) {
     )
 }
 
-export { RepoCard }
+export default RepoCard;
