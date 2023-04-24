@@ -4,7 +4,7 @@ import { AboutText, LangueageBol, Carousel, ReadMe } from './components';
 import './assets/css/style.css';
 
 let typingeffect = new Typed('.multiText', {
-	strings: ['david', 'frontend Developer', 'designer', 'awsome!'],
+	strings: ['david', 'creative Developer', 'designer', 'awesome!'],
 	loop: true,
 	typeSpeed: 100,
 	backSpeed: 80,
@@ -12,7 +12,7 @@ let typingeffect = new Typed('.multiText', {
 	backDelay: 1500,
 });
 
-ReactDOM.createRoot(document.querySelector('body')).render(
+ReactDOM.createRoot(document.getElementById('home-page')).render(
 	<React.StrictMode>
 		<ReadMe />
 
