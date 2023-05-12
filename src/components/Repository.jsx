@@ -38,6 +38,11 @@ function Scanner() {
 
 	useEffect(() => {
 		const cards = document.querySelectorAll('.card input');
+		const readme = {
+			closeBtn: document.querySelector('#readMe .close'),
+			frame: document.getElementById('readMe'),
+		};
+
 		const scanner = {
 			scanText: document.getElementById('bottom'),
 			scanLine: document.querySelector('.scan-line'),
