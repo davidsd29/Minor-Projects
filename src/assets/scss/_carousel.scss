@@ -1,9 +1,8 @@
-
-body:has(div.active) header,
-body:has(div.active) main,
-body:has(div.active) footer {
-	filter: blur(0.62em);
-}
+// body:has(div.active) header,
+// body:has(div.active) main,
+// body:has(div.active) footer {
+// 	filter: blur(0.62em);
+// }
 
 body:has(.active) #carousel,
 body:has(.load) #carousel {
@@ -19,7 +18,7 @@ body:has(.load) #carousel {
 }
 
 @property --caroY {
-	syntax: "<angle>";
+	syntax: '<angle>';
 	inherits: true;
 	initial-value: 0deg;
 }
@@ -37,10 +36,9 @@ body:has(.load) #carousel {
 		position: absolute;
 		transform-style: preserve-3d;
 		animation: rotation 20s infinite linear;
-		transform:rotatey(var(--caroY));
+		transform: rotatey(var(--caroY));
 		opacity: 1;
 		transition: 1;
-			
 
 		&:hover {
 			animation-play-state: paused;
@@ -62,15 +60,11 @@ body:has(.load) #carousel {
 	}
 }
 
-
-
-
 .scanner {
 	position: relative;
 	perspective: 62.5em;
 
-	>div {
-
+	> div {
 		&:first-of-type {
 			position: absolute;
 			top: 50%;
@@ -81,14 +75,15 @@ body:has(.load) #carousel {
 			padding: 2em;
 
 			background-color: #39496e;
-			border-radius: .8em .8em 0 0;
+			border-radius: 0.8em 0.8em 0 0;
 			border-style: outset;
 			border-color: #1c2437;
 			box-shadow: 0 0 0.62em #00000080, 0 0 0.9em #000000bf inset;
 
 			transform-style: preserve-3d;
 			transform-origin: center bottom;
-			transform: translate(-50%, 30%) rotateX(90deg) translate3d(0, -15em, -.8em);
+			transform: translate(-50%, 30%) rotateX(90deg)
+				translate3d(0, -15em, -0.8em);
 
 			// Screen
 			span {
@@ -97,9 +92,8 @@ body:has(.load) #carousel {
 				width: 100%;
 				border-radius: inherit;
 				border-style: outset;
-				border: .3em solid color(secondary);
-				box-shadow: inset 0 0 8em #4b7a8d,
-					inset 0 0 2em color(secondary),
+				border: 0.3em solid color(secondary);
+				box-shadow: inset 0 0 8em #4b7a8d, inset 0 0 2em color(secondary),
 					0 -10em 34em 5.2em #4b7a8d;
 				background-color: #00fff2;
 				overflow: hidden;
@@ -108,31 +102,47 @@ body:has(.load) #carousel {
 				&.blink {
 					&::before {
 						animation: blink 4.5s 1 forwards;
-						background-image: radial-gradient(at 40% 30%, #56ff50 10%, #00ff22 20%, #017007 60%);
-						box-shadow: 0 0 .4em color(secondary), inset 0 0 1em green, 0 0 1em .2em green;
+						background-image: radial-gradient(
+							at 40% 30%,
+							#56ff50 10%,
+							#00ff22 20%,
+							#017007 60%
+						);
+						box-shadow: 0 0 0.4em color(secondary), inset 0 0 1em green,
+							0 0 1em 0.2em green;
 					}
 				}
 
 				&::before {
-					content: "";
+					content: '';
 					position: absolute;
 					bottom: 2.5em;
 					width: 1.5em;
 					height: 1.5em;
 					border-radius: 50%;
-					background-image: radial-gradient(at 40% 30%, #ff5050 10%, #ff0000 20%, #700101 60%);
-					box-shadow: 0 0 .4em color(secondary);
+					background-image: radial-gradient(
+						at 40% 30%,
+						#ff5050 10%,
+						#ff0000 20%,
+						#700101 60%
+					);
+					box-shadow: 0 0 0.4em color(secondary);
 				}
-			
+
 				.scan-line {
 					height: calc(100% - 2px);
 					width: 100%;
-					background: linear-gradient(180deg, rgba(0, 255, 51, 0) 43%, #00ff37 211%);
+					background: linear-gradient(
+						180deg,
+						rgba(0, 255, 51, 0) 43%,
+						#00ff37 211%
+					);
 					border-bottom: 3px solid color(tertiary);
 					transform: translateY(-100%);
-					
+
 					&.scan-line-scanning {
-						animation: card-scan 2s cubic-bezier(0.53, 0, 0.43, 0.99) infinite alternate;
+						animation: card-scan 2s cubic-bezier(0.53, 0, 0.43, 0.99)
+							infinite alternate;
 					}
 				}
 
@@ -149,7 +159,7 @@ body:has(.load) #carousel {
 					transition: background-color 150ms ease-in-out;
 
 					&.dot:after {
-						content: "•";
+						content: '•';
 						position: absolute;
 						top: -0.6em;
 						left: -3.8px;
@@ -166,14 +176,14 @@ body:has(.load) #carousel {
 				background-color: color(primary);
 				height: 8%;
 				width: 80%;
-				margin-top: .9em;
+				margin-top: 0.9em;
 				margin-left: auto;
 				margin-right: auto;
-				border-radius: .5em;
+				border-radius: 0.5em;
 				border: 3px solid color(secondary);
 				box-shadow: 0 0 0.62em rgba(0, 0, 0, 0.5019607843),
-				0 0 1.5em color(secondary) inset,
-				0 0 1.5em color(secondary) inset;
+					0 0 1.5em color(secondary) inset,
+					0 0 1.5em color(secondary) inset;
 				font-size: 1.5em;
 				cursor: context-menu;
 
@@ -184,9 +194,9 @@ body:has(.load) #carousel {
 
 				&.scanning-text {
 					cursor: wait;
-					box-shadow: inset 0 3px 1em .2em color(secondary);
+					box-shadow: inset 0 3px 1em 0.2em color(secondary);
 					background-color: #00fff2;
-				
+
 					p {
 						opacity: 1;
 					}
@@ -212,7 +222,7 @@ body:has(.load) #carousel {
 			transform: translate(-50%, 45.7em);
 
 			&::before {
-				content: "Select your card";
+				content: 'Select your card';
 				position: absolute;
 				bottom: 19em;
 				left: 50%;
@@ -226,7 +236,6 @@ body:has(.load) #carousel {
 				transform: translate(-50%, -50%) scale(2.5);
 				animation: glitch 2.5s infinite;
 				transition: 5s;
-					
 			}
 
 			&.hide-text {
@@ -244,16 +253,16 @@ body:has(.load) #carousel {
 		}
 	}
 }
-	
+
 #loading {
 	position: relative;
 	opacity: 0;
 	transition: 1s;
 
-	&.load{
+	&.load {
 		opacity: 1;
 	}
-	
+
 	p {
 		position: absolute;
 		top: 50%;
@@ -277,9 +286,8 @@ body:has(.load) #carousel {
 			margin-left: -5.9em;
 			margin-top: -5.9em;
 			border-radius: 12.5em;
-				
-			box-shadow: inset 0 0 2em color(highlight),
-				0 0 3em color(highlight);
+
+			box-shadow: inset 0 0 2em color(highlight), 0 0 3em color(highlight);
 		}
 
 		// Small circle
@@ -295,7 +303,7 @@ body:has(.load) #carousel {
 			margin-top: -4.9em;
 			border-radius: 9.75em;
 			animation: Load-reverse 3s infinite linear;
-			box-shadow: 0 0 .3em color(tertiary);
+			box-shadow: 0 0 0.3em color(tertiary);
 		}
 	}
 }
@@ -309,7 +317,6 @@ body:has(.load) #carousel {
 		transform: rotate(360deg);
 	}
 }
-
 
 @keyframes Load-reverse {
 	0% {
@@ -333,7 +340,7 @@ body:has(.load) #carousel {
 
 @keyframes glitch {
 	0% {
-		transform: notranslate(-50%, -50%) scale(2.5)ne;
+		transform: notranslate(-50%, -50%) scale(2.5) ne;
 		opacity: 1;
 	}
 
@@ -396,25 +403,52 @@ body:has(.load) #carousel {
 }
 
 @keyframes blink {
-	0%, 30%, 50%, 70%{
-		background-image: radial-gradient(at 40% 30%, #ff5050 10%, #ff0000 20%, #700101 60%);
-		box-shadow: 0 0 .4em color(secondary);
+	0%,
+	30%,
+	50%,
+	70% {
+		background-image: radial-gradient(
+			at 40% 30%,
+			#ff5050 10%,
+			#ff0000 20%,
+			#700101 60%
+		);
+		box-shadow: 0 0 0.4em color(secondary);
 	}
 
-	10%, 40%, 60%, 80% {
-		background-image: radial-gradient(at 40% 30%, #ff5050 10%, #ff0000 20%, #700101 60%);
-		box-shadow: 0 0 .4em color(secondary), inset 0 0 1em red, 0 0 1em .2em red;
+	10%,
+	40%,
+	60%,
+	80% {
+		background-image: radial-gradient(
+			at 40% 30%,
+			#ff5050 10%,
+			#ff0000 20%,
+			#700101 60%
+		);
+		box-shadow: 0 0 0.4em color(secondary), inset 0 0 1em red,
+			0 0 1em 0.2em red;
 	}
 
 	90% {
-		background-image: radial-gradient(at 40% 30%, #56ff50 10%, #00ff22 20%, #017007 60%);
-		box-shadow: 0 0 .4em color(secondary);
+		background-image: radial-gradient(
+			at 40% 30%,
+			#56ff50 10%,
+			#00ff22 20%,
+			#017007 60%
+		);
+		box-shadow: 0 0 0.4em color(secondary);
 	}
-	
-	100% {
-		background-image: radial-gradient(at 40% 30%, #56ff50 10%, #00ff22 20%, #017007 60%);
-		box-shadow: 0 0 .4em color(secondary), inset 0 0 1em green, 0 0 1em .2em green;
 
+	100% {
+		background-image: radial-gradient(
+			at 40% 30%,
+			#56ff50 10%,
+			#00ff22 20%,
+			#017007 60%
+		);
+		box-shadow: 0 0 0.4em color(secondary), inset 0 0 1em green,
+			0 0 1em 0.2em green;
 	}
 }
 
@@ -431,34 +465,35 @@ body:has(.load) #carousel {
 	width: 40%;
 	height: auto;
 	padding: 1em;
-	box-shadow: 0 0 1.5em 0.25em #FFFFFF,
-		0 0 0.2em 1em color(tertiary),
+	box-shadow: 0 0 1.5em 0.25em #ffffff, 0 0 0.2em 1em color(tertiary),
 		inset 0 0 15em 1.8em color(tertiary);
 	opacity: 0;
 	visibility: hidden;
 	text-align: center;
-	transform: translate(-50%, -50%) scale(0.9);
-	transition: all .3s;
-	z-index: 10;	
+	transform: scale(0.9);
+	backdrop-filter: blur(1.5em);
+
+	transition: all 0.3s;
+	z-index: 10;
 
 	&.active {
-		top: 50%;
 		left: 50%;
 		visibility: visible;
 		opacity: 1;
-		transform: translate(-50%, -50%) scale(1);
+		transform: translate(-50%, 0%) scale(1);
 	}
 
 	article {
+		overflow-x: hidden;
 		overflow-y: scroll;
 		max-height: 20em;
 		padding: 1em;
 		margin-top: 2em;
 		text-align: left;
 
-		
-
-		h2,h3,h4 {
+		h2,
+		h3,
+		h4 {
 			margin: 0.5em 0;
 		}
 	}
@@ -466,7 +501,7 @@ body:has(.load) #carousel {
 	h1 {
 		margin: 1em auto;
 	}
-	
+
 	img {
 		width: 70%;
 		max-width: 18em;
@@ -485,15 +520,15 @@ body:has(.load) #carousel {
 		&:focus-within {
 			color: color(quaternary);
 		}
-	
+
 		&:hover {
 			color: color(hover);
 		}
-	
+
 		&:focus {
 			color: color(focus);
 		}
-	
+
 		&:active {
 			color: color(active);
 		}
@@ -512,7 +547,7 @@ body:has(.load) #carousel {
 
 			p {
 				color: color(secondary);
-				margin-bottom: .5em;
+				margin-bottom: 0.5em;
 			}
 		}
 	}
@@ -524,8 +559,9 @@ body:has(.load) #carousel {
 		font-size: 1.1em;
 		letter-spacing: 0.05rem;
 		color: inherit;
-		text-shadow: 0.06em 0.06em 2px color(quaternary), 0 0 1em dodgerblue, 0 0 0.2em skyblue;
-		transition: all .4s;
+		text-shadow: 0.06em 0.06em 2px color(quaternary), 0 0 1em dodgerblue,
+			0 0 0.2em skyblue;
+		transition: all 0.4s;
 		cursor: pointer;
 
 		&:hover {

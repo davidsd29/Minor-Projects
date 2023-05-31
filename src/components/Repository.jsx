@@ -2,6 +2,7 @@ import { ReplanishData, GetSelectedGitRepo } from '../utils/Fetch.js';
 
 import React, { useEffect } from 'react';
 import RepoCard from './Card.jsx';
+import ReadMe  from './ReadMe';
 
 let repoInfo;
 
@@ -20,7 +21,8 @@ let repoCount = repoInfo.length;
 
 function Carousel() {
 	const cardItems = repoInfo.map((item) => {
-		if (item.archived == false) return <RepoCard data={item} />;
+		console.log(item);
+		if (item.stargazers_count >= 1) return <RepoCard data={item} />;
 	});
 
 	useEffect(() => {
@@ -29,6 +31,7 @@ function Carousel() {
 
 	return (
 		<section id="repository">
+				<ReadMe />
 			<div className="carousel-container">
 				<div id="carousel">
 					{/* check if card items is empty */}
@@ -71,7 +74,7 @@ function Scanner() {
 					}, 4000);
 
 					e.target.parentElement.classList.add('scan');
-					OpenReadMe(e.target.parentElement, scanner);
+					OpenReadMe(e.target.parentElement, scanner, readme);
 				}
 			});
 		});
@@ -164,7 +167,8 @@ function EnableCards(cards) {
 	});
 }
 
-function OpenReadMe(card, scanner) {
+
+function OpenReadMe(card, scanner, readme) {
 	const repoID = Number(card.getAttribute('data-value'));
 
 	card.addEventListener('animationend', () => {

@@ -14,11 +14,10 @@ let typingeffect = new Typed('.multiText', {
 
 ReactDOM.createRoot(document.getElementById('home-page')).render(
 	<React.StrictMode>
-		<ReadMe />
-
 		<main>
 			<section id="github-repos">
 				<Carousel />
+			
 
 				<div className="click-me">
 					<a href="#about">
