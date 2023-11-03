@@ -1,0 +1,87 @@
+@import '../../styles/global';
+
+.clickMe {
+    position: absolute;
+    left: 3%;
+    bottom: calc(0vh + 3em);
+    transform: translate(-50%, -50%);
+    display: grid;
+    place-items: center;
+    text-align: center;
+    margin-top: 3em;
+    margin-bottom: 7em;
+
+
+    &:hover {
+        p {
+            text-shadow: 1px 1px 2px orchid, 0 0 0.2em color(hover);
+
+            &::before,
+            &::after {
+                background-color: color(hover);
+            }
+        }
+
+    }
+
+    a {
+        position: relative;
+        color: inherit;
+
+        p {
+            writing-mode: vertical-rl;
+            text-shadow: 1px 1px 2px darkcyan, 0 0 0.2em color(tertiary);
+            animation: Bounce 0.8s linear infinite alternate;
+
+            &::before,
+            &::after {
+                content: '';
+                position: absolute;
+                bottom: -90%;
+                left: -54%;
+                width: 1.6em;
+                height: 0.1em;
+                background-color: color(tertiary);
+                transform: rotate(44deg);
+            }
+
+            &::after {
+                right: -54%;
+                left: auto;
+                transform: rotate(-44deg);
+            }
+        }
+    }
+
+    &.back-up {
+        p {
+            writing-mode: unset;
+
+            &::before,
+            &::after {
+                top: -90%;
+                left: -4%;
+                height: 0.1em;
+                width: 2.6em;
+                background-color: color(tertiary);
+                transform: rotate(-25deg);
+            }
+
+            &::after {
+                right: -4%;
+                left: auto;
+                transform: rotate(25deg);
+            }
+        }
+    }
+}
+
+@keyframes Bounce {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(1em);
+    }
+}

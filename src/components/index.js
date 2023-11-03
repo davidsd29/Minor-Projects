@@ -1,14 +1,24 @@
-import RepoCard from "./Card";
-import Carousel from "./Repository";
-import ReadMe from "./ReadMe";
-import AboutText from "./About";
-import LangueageBol from "./Bol";
+import RepoCard from "./Card/Card";
+import MainContent from "./Main/MainContent";
+import Carousel from "./Carousel/Carousel";
+import ReadMe from "./ReadMe/ReadMe";
+import About from "./About/About";
+import Hero from "./Hero/Hero";
+import WordsBol from "./WordsBol/Bol";
+import Loader from "./Loader/Loader";
+import Scanner from "./Scanner/Scanner";
+import SideLink from "./Details/SideLink";
 
 
 export {
+  Hero,
+  About,
   ReadMe,
-  RepoCard,
+  Loader,
+  Scanner,
+  WordsBol,
   Carousel,
-  AboutText,
-  LangueageBol,
+  RepoCard,
+  SideLink,
+  MainContent,
 };

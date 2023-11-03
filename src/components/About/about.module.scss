@@ -1,4 +1,6 @@
-#about {
+@import '../../styles/global';
+
+.about {
     width: 100%;
     margin-bottom: 0;
     cursor: context-menu;
@@ -6,19 +8,6 @@
 
     h2 {
         margin-bottom: 2em;
-    }
-
-    #myCanvasContainer {
-        width: 30em;
-
-        @include respond-to(up-to-md) {
-            text-align: center;
-        }
-
-        #myCanvas {
-            margin: auto;
-            width: 100%;
-        }
     }
 
     p {

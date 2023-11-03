@@ -1,0 +1,14 @@
+@import '../../styles/global';
+  
+  .canvasContainer {
+        width: 30em;
+
+        @include respond-to(up-to-md) {
+            text-align: center;
+        }
+
+       canvas {
+            margin: auto;
+            width: 100%;
+        }
+    }

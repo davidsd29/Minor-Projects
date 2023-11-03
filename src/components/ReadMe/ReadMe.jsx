@@ -1,7 +1,9 @@
+import styles from './readMe.module.scss';
+
 const ReadMe = () => {
 	return (
-        <div id='readMe'>
-			<span className='close'>Close</span>
+        <div data-selector="readMe" className={styles.readMe } >
+			<span className={styles.close}>Close</span>
 			<article></article>
 
 			<section>

@@ -1,3 +1,5 @@
+@import '../../styles/global';
+
 .card {
     position: absolute;
     left: 0.62em;
@@ -22,15 +24,6 @@
         transform: rotateY(var(--cardY, 0deg)) translateZ(40vmin);
     }
 
-    &.scan {
-        animation-name: scan;
-        animation-duration: 5s;
-        animation-timing-function: ease-in-out;
-        animation-fill-mode: forwards;
-        animation-iteration-count: 1;
-        transform: rotateY(calc(var(--caroY) * -1)) translateY(100%) rotateX(70deg) translateX(1em) translateY(50vmin);
-    }
-
     &:hover {
         color: color(secondary);
         background-color: skyblue;
@@ -43,7 +36,7 @@
         position: absolute;
         top: 0;
         left: 0;
-        background-image: url("../img/yugioh_backside.png");
+        background-image: url("/images/yugioh_backside.png");
         background-position: center;
         filter: invert(1) hue-rotate(-67deg);
         box-shadow: inset 0 0 3.1em 0.62em #ffd400;
@@ -52,13 +45,11 @@
         -webkit-backface-visibility: hidden;
     }
 
-
     @for $i from 1 through variable(repo-count) {
         &:nth-child(#{$i}) {
             --cardY: #{$i * 50deg};
         }
     }
-
 
     input {
         display: none;
@@ -173,40 +164,5 @@
             left: auto;
             transform: rotate(45deg);
         }
-    }
-}
-
-@keyframes scan {
-
-    0% {
-        opacity: 1;
-        transform:
-            rotateY(var(--cardY, 0deg)) translatez(30vmin);
-    }
-
-    50% {
-        opacity: 1;
-        transform:
-            rotateY(calc(var(--caroY) * -1)) translateY(100%) rotateX(70deg) translateY(-50vmin);
-    }
-
-    60%,
-    70% {
-        opacity: 1;
-    }
-
-
-    80% {
-        opacity: 1;
-    }
-
-    88% {
-        opacity: 0;
-    }
-
-    100% {
-        transform:
-            rotateY(calc(var(--caroY) * -1)) translateY(100%) rotateX(70deg) translateX(1em) translateY(50vmin);
-        opacity: 0;
     }
 }

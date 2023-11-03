@@ -1,8 +1,6 @@
-import gitLogo from '../assets/img/github_logo.png';
-import monster from '../assets/img/monster.webp';
+import styles from './card.module.scss'
 
-
-function RepoCard(card) {
+const RepoCard = (card) => {
     let repoDescription;
 
     if (card.data.description != null) {
@@ -11,12 +9,13 @@ function RepoCard(card) {
         repoDescription = "There is no description for this repo...";
     }
 
+    card.data.language = card.data.description != null ? "No Language" : repoDescription = "There is no description for this repo...";
     return (
-        <label className="card" data-value={card.data.id}>
+        <label className={styles.card} data-value={card.data.id}>
             <input type="radio" name="card" id="open"/>
             <header>
                 <h4>{card.data.name}</h4>
-                <img src={gitLogo} alt="Github Logo" />
+                <img src='/images/github_logo.png' alt="Github Logo" />
             </header>
 
             <div>
@@ -30,7 +29,7 @@ function RepoCard(card) {
             </div>
 
             <div>
-                <img src={monster} alt="" />
+                <img src='/images/monster.webp' alt="A YugGio Charcater" />
             </div>
 
             <figcaption>{repoDescription}</figcaption>

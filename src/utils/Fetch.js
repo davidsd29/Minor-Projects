@@ -11,8 +11,8 @@ async function GetRepo(repo, owner) {
     let project;
 
     const link = {
-        repo: document.querySelector("#readMe div:first-of-type a"),
-        project: document.querySelector("#readMe div:last-of-type a"),
+        repo: document.querySelector('[data-selector="readMe"] div:first-of-type a'),
+        project: document.querySelector('[data-selector="readMe"] div:last-of-type a'),
     }
     
     if (repo.homepage !== null) {
@@ -26,9 +26,9 @@ async function GetRepo(repo, owner) {
             .then(response => response.text())
             .then(result => {
                 if(result == "404: Not Found") {
-                    document.querySelector('#readMe article').innerHTML ="There is no readMe found for this repository... But"
+                    document.querySelector('[data-selector="readMe"] article').innerHTML ="There is no readMe found for this repository... But"
                 } else {
-                    document.querySelector('#readMe article').innerHTML = markdownParser(result)
+                    document.querySelector('[data-selector="readMe"] article').innerHTML = markdownParser(result)
                 }
             });
 
@@ -51,7 +51,8 @@ const markdownParser = (text) => {
 		.replace(/^# (.*$)/gim, '<h1>$1</h1>') // h1 tag
 		.replace(/\*\*(.*)\*\*/gim, '<b>$1</b>') // bold text
 		.replace(/\*(.*)\*/gim, '<i>$1</i>') // italic text
-        .replace(/\[(.*?)\]\((.*?)\)/gim, "<a href='$2'>$1</a>"); // l0ink
+        .replace(/\[(.*?)\]\((.*?)\)/gim, "<a href='$2'>$1</a>") // l0ink
+        .replace(/<img[^>]*>/g,""); // remove images
 	return toHTML.trim(); // using trim method to remove whitespace
 }
 

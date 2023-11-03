@@ -15,6 +15,11 @@
      repo-count: 7,
  );
 
+ @property --caroY {
+     syntax: '<angle>';
+     inherits: true;
+     initial-value: 0deg;
+ }
 
  @font-face {
      font-family: Audiowide;

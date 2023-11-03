@@ -1,10 +1,11 @@
 import { useEffect } from 'react';
 
-function LangueageBol() {
+const WordsBol = () => {
+
 	useEffect(() => {
 		// words canvas
 		let myCanvas = document.getElementById('myCanvas'),
-			canvasContainer = document.getElementById('myCanvasContainer');
+			canvasContainer = document.querySelector('.canvasContainer');
 
 		let color = '#08fdd8',
 			outlineColour = '#e60de6';
@@ -33,7 +34,7 @@ function LangueageBol() {
 
 	return (
 		<aside>
-			<div id="myCanvasContainer">
+			<div className={StyleSheet.canvasContainer}>
 				<canvas width="400" height="400" id="myCanvas">
 					<p>A little bit info about me</p>
 				</canvas>
@@ -84,4 +85,4 @@ function LangueageBol() {
 	);
 }
 
-export default LangueageBol;
+export default WordsBol;
