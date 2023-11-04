@@ -24,7 +24,7 @@ const Hero = () => {
 				<h1 aria-label="It's me, David, frontend developer" id="title">
 					Hi, I'm <span ref={title}></span>
 				</h1>
-				<a href="mailto:davidsdankwah@gmail.com" class={styles.btn}>
+				<a href="mailto:davidsdankwah@gmail.com" className={styles.btn}>
 					Contact me
 				</a>
 			</section>

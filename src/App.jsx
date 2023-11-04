@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { MainContent, Hero } from './components';
-import './style.css';
+import './style.scss';
 
 
 ReactDOM.createRoot(document.body).render(

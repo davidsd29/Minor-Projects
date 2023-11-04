@@ -27,28 +27,12 @@ html {
 	height: 100%;
 }
 
-
-body {
-	position: relative;
-	display: grid;
-	justify-content: center;
-	margin-left: auto;
-	margin-right: auto;
-	padding: 2em;
-	max-width: 80em;
-	color: color(quaternary);
-	color-scheme: light dark;
-	background-color: color(secondary);
-	perspective: 1000px;
-}
-
 main {
 	max-width: 1000px;
 	padding: 0 1em;
 
 	>section {
 		position: relative;
-		height: 100vh;
 		margin: 6em 0;
 		scroll-margin: 4em;
 
